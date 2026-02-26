@@ -1,0 +1,52 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T20:22:40.477Z",
+  "summary": "The diff implements all five requirements (REQ-26 through REQ-30). The core hook (useLivePrice), utility function (getLivePrice), LivePriceTicker component, LivePriceChart component, and integrations into StockPlaygroundPage and PortfolioAnalyzerPage are all present. However, there is one notable gap: the useLivePrice hook is placed in frontend/src/hooks/useLivePrice.ts rather than in frontend/src/data/mockStocks.ts as specified in REQ-26. The getLivePrice function appears to be added to mockStocks.ts, but the hook itself is extracted to a separate file. Additionally, the useLivePrice hook returns extra fields beyond what was specified.",
+  "missing_requirements": [
+    {
+      "id": "REQ-26",
+      "requirement": "Export the useLivePrice hook from frontend/src/data/mockStocks.ts (not a separate hooks file).",
+      "reason": "The spec explicitly states to export the useLivePrice hook from frontend/src/data/mockStocks.ts, but the diff places the hook in frontend/src/hooks/useLivePrice.ts instead.",
+      "evidence": [
+        "frontend/src/hooks/useLivePrice.ts",
+        "frontend/src/data/mockStocks.ts"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "The useLivePrice hook returns additional fields sessionOpenPrice and absoluteChange beyond the specified interface of price, previousPrice, changePercent, and isUp.",
+      "reason": "REQ-26 specifies the hook returns only price, previousPrice, changePercent, and isUp. The implementation adds sessionOpenPrice and absoluteChange which were not requested.",
+      "evidence": [
+        "frontend/src/hooks/useLivePrice.ts"
+      ]
+    },
+    {
+      "description": "LivePriceTicker accepts a compact prop rendering a condensed inline variant.",
+      "reason": "REQ-27 does not specify a compact mode or alternate rendering variant for the LivePriceTicker component.",
+      "evidence": [
+        "frontend/src/components/LivePriceTicker.tsx"
+      ]
+    },
+    {
+      "description": "LivePriceChart accepts a configurable height prop.",
+      "reason": "REQ-28 does not mention a configurable height prop for the LivePriceChart component.",
+      "evidence": [
+        "frontend/src/components/LivePriceChart.tsx"
+      ]
+    }
+  ],
+  "confidence": 0.8,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/components/LivePriceChart.tsx",
+    "frontend/src/components/LivePriceTicker.tsx",
+    "frontend/src/data/mockStocks.ts",
+    "frontend/src/hooks/useLivePrice.ts",
+    "frontend/src/index.css",
+    "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+    "frontend/src/pages/StockPlaygroundPage.tsx",
+    "project_state.json"
+  ]
+}

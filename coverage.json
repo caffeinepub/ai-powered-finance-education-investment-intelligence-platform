@@ -1,0 +1,91 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-26T20:22:40.482Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 5,
+    "implemented": 5,
+    "items": [
+      {
+        "id": "REQ-26",
+        "summary": "Add a simulated real-time price feed mechanism to the frontend. In `frontend/src/data/mockStocks.ts`, add a utility function `getLivePrice(symbol: string): number` that returns a mock current price by applying a small random walk delta (±0.5%) to the stock's last OHLCV close price on each call, simulating live price movement. Export a `useLivePrice(symbol: string, intervalMs?: number)` React hook that uses `setInterval` (default 3000ms) to repeatedly call `getLivePrice` and returns the current price, the previous price (for change direction), and the percentage change since the session started.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/data/mockStocks.ts",
+          "frontend/src/hooks/useLivePrice.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/data/mockStocks.ts",
+          "frontend/src/hooks/useLivePrice.ts"
+        ]
+      },
+      {
+        "id": "REQ-27",
+        "summary": "Create a `LivePriceTicker` component at `frontend/src/components/LivePriceTicker.tsx`. This component accepts a `symbol` prop and uses the `useLivePrice` hook to display: the stock symbol, the current live price formatted to 2 decimal places, the absolute price change, and the percentage change since session start. Color the price green when trending up and red when trending down, with a subtle animated pulse on each price update. Style consistently with the platform's teal/gold dark-finance glassmorphism theme using `GlassCard`.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/LivePriceTicker.tsx",
+          "frontend/src/index.css"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/LivePriceTicker.tsx",
+          "frontend/src/index.css"
+        ]
+      },
+      {
+        "id": "REQ-28",
+        "summary": "Create a `LivePriceChart` component at `frontend/src/components/LivePriceChart.tsx`. This component accepts a `symbol` prop and maintains a rolling buffer of the last 60 live price ticks (sampled every 3 seconds) using a `useRef`-backed array updated via the `useLivePrice` hook. Render the buffered price series as a real-time updating Recharts `LineChart` with a smooth animated line, no X-axis labels (just time-ordered ticks), a Y-axis showing the price range, a `ReferenceLine` at the session-open price, and a color-coded line (teal if current price ≥ open, red if below). Include a custom tooltip showing price and relative elapsed time.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/LivePriceChart.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/LivePriceChart.tsx"
+        ]
+      },
+      {
+        "id": "REQ-29",
+        "summary": "Integrate the `LivePriceTicker` and `LivePriceChart` components into `frontend/src/pages/StockPlaygroundPage.tsx`. When a user selects a stock symbol, display the `LivePriceTicker` for that symbol prominently above the prediction form, and render the `LivePriceChart` below or beside it (within a `GlassCard`) so the user can observe live simulated price movement before submitting their prediction. The existing `StockPriceChart` (historical data) should remain visible, clearly labelled 'Historical Price', while the new live chart is labelled 'Live Price'.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/StockPlaygroundPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/StockPlaygroundPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-30",
+        "summary": "Integrate `LivePriceTicker` components into `frontend/src/pages/PortfolioAnalyzerPage.tsx`. For each holding displayed in the holdings table/list, render a `LivePriceTicker` inline showing the real-time simulated price for that holding's stock symbol. Update the displayed 'Current Price' column used for unrealized gain/loss calculations to use the live price from `useLivePrice` so that total portfolio value and P&L figures refresh in real time as prices tick.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/PortfolioAnalyzerPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/PortfolioAnalyzerPage.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/components/LivePriceChart.tsx",
+    "frontend/src/components/LivePriceTicker.tsx",
+    "frontend/src/data/mockStocks.ts",
+    "frontend/src/hooks/useLivePrice.ts",
+    "frontend/src/index.css",
+    "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+    "frontend/src/pages/StockPlaygroundPage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

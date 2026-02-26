@@ -1,0 +1,351 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 15,
+  "summary": "AI-Powered Finance Education & Investment Intelligence Platform — a full-stack web app integrating financial learning, stock prediction playground, news intelligence, portfolio analysis, and an AI chatbot advisor into a unified ecosystem.",
+  "architectural_notes": [
+    "Separate frontend and backend clearly; use a modern stack (e.g., React + Node/FastAPI)",
+    "ML models needed for stock prediction and news sentiment analysis",
+    "AI chatbot advisor must consume data from News Module, Portfolio Analyzer, and Stock Playground",
+    "Follow security best practices: JWT auth, API key protection, input validation"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-internet-identity-based-user-authentication-with-persistent-user-profiles-stored-on-chain-each-profile-must-track-display-name-learning-progress-completed-lessons-assessment-scores-stock-prediction-history-predictions-made-outcomes-accuracy-rate-and-portfolio-data-references",
+      "title": "Implement Internet Identity-based user authentication with persistent user profiles stored on-chain. Each profile must track: display name, learning progress (completed lessons, assessment scores), stock prediction history (predictions made, outcomes, accuracy rate), and portfolio data references.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-finance-learning-assessment-module-with-at-least-5-structured-topic-categories-e-g-stocks-basics-bonds-portfolio-theory-technical-analysis-risk-management-each-topic-contains-lesson-content-and-a-multiple-choice-quiz-track-per-user-completion-status-and-quiz-scores-display-overall-learning-progress-as-a-percentage-on-the-user-profile",
+      "title": "Build a Finance Learning & Assessment Module with at least 5 structured topic categories (e.g., Stocks Basics, Bonds, Portfolio Theory, Technical Analysis, Risk Management). Each topic contains lesson content and a multiple-choice quiz. Track per-user completion status and quiz scores. Display overall learning progress as a percentage on the user profile.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-stock-prediction-playground-a-paper-trading-arena-where-users-can-select-a-simulated-stock-from-a-predefined-list-of-at-least-10-symbols-with-mock-ohlc-data-input-their-directional-prediction-up-down-flat-for-a-given-timeframe-and-submit-the-system-must-display-1-the-user-s-prediction-2-a-platform-generated-ai-prediction-based-on-a-simple-rule-based-statistical-model-using-the-mock-data-3-the-simulated-actual-outcome-after-the-timeframe-after-resolution-generate-and-display-an-intelligent-textual-explanation-of-the-outcome-referencing-price-movement-patterns-whether-predictions-matched-or-diverged",
+      "title": "Create a Stock Prediction Playground: a paper-trading arena where users can select a simulated stock (from a predefined list of at least 10 symbols with mock OHLC data), input their directional prediction (Up/Down/Flat) for a given timeframe, and submit. The system must display: (1) the user's prediction, (2) a platform-generated AI prediction based on a simple rule-based/statistical model using the mock data, (3) the simulated actual outcome after the timeframe. After resolution, generate and display an intelligent textual explanation of the outcome referencing price movement patterns, whether predictions matched or diverged.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-financial-news-intelligence-module-that-displays-a-curated-feed-of-at-least-20-pre-seeded-financial-news-articles-with-title-summary-date-and-related-stock-symbols-for-each-article-apply-a-sentiment-analysis-model-rule-based-keyword-scoring-positive-negative-neutral-and-display-the-sentiment-label-a-sentiment-score-and-a-visual-indicator-of-the-estimated-market-impact-direction-include-a-chart-showing-the-simulated-market-movement-correlation-with-each-news-item-s-sentiment-over-a-timeline",
+      "title": "Build a Financial News Intelligence Module that displays a curated feed of at least 20 pre-seeded financial news articles (with title, summary, date, and related stock symbols). For each article, apply a sentiment analysis model (rule-based keyword scoring: positive/negative/neutral) and display: the sentiment label, a sentiment score, and a visual indicator of the estimated market impact direction. Include a chart showing the simulated market movement correlation with each news item's sentiment over a timeline.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-portfolio-analyzer-dashboard-users-can-manually-input-a-portfolio-of-up-to-20-holdings-stock-symbol-number-of-shares-average-buy-price-the-dashboard-must-display-1-allocation-breakdown-as-a-pie-donut-chart-by-sector-and-by-holding-2-total-portfolio-value-and-unrealized-gain-loss-using-mock-current-prices-3-risk-exposure-score-simple-volatility-based-calculation-and-4-diversification-suggestions-store-portfolio-data-per-user-in-the-backend",
+      "title": "Implement a Portfolio Analyzer dashboard. Users can manually input a portfolio of up to 20 holdings (stock symbol, number of shares, average buy price). The dashboard must display: (1) allocation breakdown as a pie/donut chart by sector and by holding, (2) total portfolio value and unrealized gain/loss using mock current prices, (3) risk exposure score (simple volatility-based calculation), and (4) diversification suggestions. Store portfolio data per user in the backend.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-an-ai-financial-strategy-advisor-as-a-conversational-chatbot-ui-the-advisor-must-1-accept-free-text-finance-related-queries-from-the-user-2-generate-contextual-responses-using-the-user-s-portfolio-data-recent-prediction-history-and-news-sentiment-data-stored-in-the-backend-3-provide-predefined-intelligent-response-templates-for-common-finance-topics-e-g-diversification-stop-loss-sector-rotation-the-chatbot-must-surface-personalized-suggestions-referencing-the-user-s-actual-portfolio-holdings-and-prediction-accuracy",
+      "title": "Build an AI Financial Strategy Advisor as a conversational chatbot UI. The advisor must: (1) accept free-text finance-related queries from the user, (2) generate contextual responses using the user's portfolio data, recent prediction history, and news sentiment data stored in the backend, (3) provide predefined intelligent response templates for common finance topics (e.g., diversification, stop-loss, sector rotation). The chatbot must surface personalized suggestions referencing the user's actual portfolio holdings and prediction accuracy.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-community-insights-forum-module-where-authenticated-users-can-post-short-text-messages-max-500-characters-with-optional-stock-symbol-tags-upvote-posts-and-browse-the-community-feed-sorted-by-recency-or-top-votes-store-all-posts-and-votes-in-the-motoko-backend",
+      "title": "Build a Community Insights Forum module where authenticated users can post short text messages (max 500 characters) with optional stock symbol tags, upvote posts, and browse the community feed sorted by recency or top votes. Store all posts and votes in the Motoko backend.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-enhanced-interactive-data-visualizations-across-all-modules-using-recharts-or-a-similar-react-compatible-charting-library-candlestick-line-charts-for-stock-playground-price-history-animated-sentiment-impact-timeline-in-the-news-module-donut-bar-charts-for-portfolio-allocation-and-performance-and-a-heatmap-or-bubble-chart-for-portfolio-risk-concentration",
+      "title": "Implement enhanced interactive data visualizations across all modules using Recharts or a similar React-compatible charting library: candlestick/line charts for stock playground price history, animated sentiment-impact timeline in the news module, donut + bar charts for portfolio allocation and performance, and a heatmap or bubble chart for portfolio risk concentration.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-design-and-apply-a-cohesive-premium-dark-finance-visual-theme-across-the-entire-platform-use-a-dark-charcoal-near-black-base-with-electric-teal-and-amber-gold-accent-colors-modern-sans-serif-typography-e-g-inter-card-based-layouts-with-subtle-glassmorphism-effects-on-dashboards-and-a-persistent-top-navigation-bar-with-module-links-and-user-profile-access-ensure-consistent-spacing-micro-interactions-on-interactive-elements-and-a-professional-financial-grade-aesthetic-throughout",
+      "title": "Design and apply a cohesive, premium dark-finance visual theme across the entire platform. Use a dark charcoal/near-black base with electric teal and amber/gold accent colors, modern sans-serif typography (e.g., Inter), card-based layouts with subtle glassmorphism effects on dashboards, and a persistent top navigation bar with module links and user profile access. Ensure consistent spacing, micro-interactions on interactive elements, and a professional financial-grade aesthetic throughout.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-and-use-custom-visual-assets-a-platform-logo-mark-teal-gold-abstract-chart-and-brain-icon-a-hero-banner-for-the-landing-page-and-a-default-avatar-placeholder-image",
+      "title": "Generate and use custom visual assets: a platform logo mark (teal/gold abstract chart-and-brain icon), a hero banner for the landing page, and a default avatar placeholder image.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-usemarketalerts-react-query-hook-in-frontend-src-hooks-usequeries-ts-that-calls-the-backend-getmarketalerts-endpoint-and-polls-for-updates-every-30-seconds-to-simulate-real-time-detection-the-hook-must-return-the-list-of-alerts-and-a-loading-state",
+      "title": "Add a `useMarketAlerts` React Query hook in `frontend/src/hooks/useQueries.ts` that calls the backend `getMarketAlerts()` endpoint and polls for updates every 30 seconds to simulate real-time detection. The hook must return the list of alerts and a loading state.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-marketalertbanner-component-at-frontend-src-components-marketalertbanner-tsx-this-component-renders-a-horizontally-scrolling-ticker-style-banner-or-a-dismissible-toast-style-alert-strip-at-the-top-of-the-news-module-page-each-alert-must-display-a-severity-indicator-icon-color-coded-red-for-critical-amber-for-high-teal-for-medium-the-alert-headline-related-stock-symbols-as-small-badges-and-a-relative-timestamp-alerts-with-severity-critical-or-high-must-be-visually-prominent-using-the-platform-s-teal-gold-accent-theme-and-glassmorphism-card-style-consistent-with-glasscard",
+      "title": "Create a new `MarketAlertBanner` component at `frontend/src/components/MarketAlertBanner.tsx`. This component renders a horizontally scrolling ticker-style banner or a dismissible toast-style alert strip at the top of the News Module page. Each alert must display: a severity indicator icon (color-coded: red for 'critical', amber for 'high', teal for 'medium'), the alert headline, related stock symbols as small badges, and a relative timestamp. Alerts with severity 'critical' or 'high' must be visually prominent using the platform's teal/gold accent theme and glassmorphism card style consistent with `GlassCard`.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-the-marketalertbanner-component-into-frontend-src-pages-newsmodulepage-tsx-by-placing-it-above-the-news-feed-content-area-wire-it-to-the-usemarketalerts-hook-so-that-it-auto-updates-as-new-alerts-are-detected-additionally-add-a-persistent-bell-icon-notification-indicator-in-frontend-src-components-topnav-tsx-that-shows-a-count-badge-of-unread-active-critical-or-high-severity-alerts-clicking-the-bell-navigates-the-user-to-the-news-module-page",
+      "title": "Integrate the `MarketAlertBanner` component into `frontend/src/pages/NewsModulePage.tsx` by placing it above the news feed content area. Wire it to the `useMarketAlerts` hook so that it auto-updates as new alerts are detected. Additionally, add a persistent bell icon notification indicator in `frontend/src/components/TopNav.tsx` that shows a count badge of unread/active 'critical' or 'high' severity alerts. Clicking the bell navigates the user to the News Module page.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-usesetuserpassword-and-useverifyuserpassword-react-query-mutation-hooks-in-frontend-src-hooks-usequeries-ts-that-call-the-backend-setuserpassword-and-verifyuserpassword-endpoints-respectively-each-hook-must-accept-a-sha-256-hex-encoded-password-hash-string-as-its-argument",
+      "title": "Add `useSetUserPassword` and `useVerifyUserPassword` React Query mutation hooks in `frontend/src/hooks/useQueries.ts` that call the backend `setUserPassword` and `verifyUserPassword` endpoints respectively. Each hook must accept a SHA-256 hex-encoded password hash string as its argument.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-passwordsetupmodal-component-at-frontend-src-components-passwordsetupmodal-tsx-this-modal-allows-authenticated-users-to-set-or-update-a-numeric-pin-or-alphanumeric-password-minimum-6-characters-the-component-must-1-show-a-password-input-field-and-a-confirm-field-with-visibility-toggle-2-hash-the-input-client-side-using-the-web-crypto-api-sha-256-before-calling-usesetuserpassword-3-display-inline-validation-errors-mismatch-too-short-and-4-show-a-success-toast-on-completion-style-using-the-existing-glassmorphism-card-style-consistent-with-glasscard-and-the-platform-s-teal-gold-dark-finance-theme",
+      "title": "Create a `PasswordSetupModal` component at `frontend/src/components/PasswordSetupModal.tsx`. This modal allows authenticated users to set or update a numeric PIN or alphanumeric password (minimum 6 characters). The component must: (1) show a password input field and a confirm field with visibility toggle, (2) hash the input client-side using the Web Crypto API (SHA-256) before calling `useSetUserPassword`, (3) display inline validation errors (mismatch, too short), and (4) show a success toast on completion. Style using the existing glassmorphism card style consistent with `GlassCard` and the platform's teal/gold dark-finance theme.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-biometricauthbutton-component-at-frontend-src-components-biometricauthbutton-tsx-that-uses-the-web-authentication-api-navigator-credentials-create-navigator-credentials-get-to-register-and-authenticate-a-user-via-platform-biometrics-fingerprint-face-id-or-device-pin-via-webauthn-the-component-must-1-show-a-register-fingerprint-button-for-first-time-setup-that-creates-a-webauthn-credential-and-stores-the-credential-id-in-localstorage-under-the-user-s-principal-key-2-show-an-authenticate-with-fingerprint-button-that-triggers-a-webauthn-assertion-using-the-stored-credential-id-and-3-display-clear-status-messages-for-unsupported-browsers-registration-success-and-authentication-success-failure-style-consistently-with-the-platform-s-teal-gold-dark-finance-theme-using-glasscard",
+      "title": "Create a `BiometricAuthButton` component at `frontend/src/components/BiometricAuthButton.tsx` that uses the Web Authentication API (`navigator.credentials.create` / `navigator.credentials.get`) to register and authenticate a user via platform biometrics (fingerprint, Face ID, or device PIN via WebAuthn). The component must: (1) show a 'Register Fingerprint' button for first-time setup that creates a WebAuthn credential and stores the credential ID in `localStorage` under the user's principal key, (2) show an 'Authenticate with Fingerprint' button that triggers a WebAuthn assertion using the stored credential ID, and (3) display clear status messages for unsupported browsers, registration success, and authentication success/failure. Style consistently with the platform's teal/gold dark-finance theme using `GlassCard`.",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-security-settings-section-to-frontend-src-pages-profilepage-tsx-that-renders-both-the-passwordsetupmodal-triggered-by-a-set-password-button-and-the-biometricauthbutton-component-the-section-must-only-be-visible-to-authenticated-users-and-must-be-placed-below-the-existing-profile-stats-label-the-section-security-authentication-with-a-lock-icon-consistent-with-the-platform-s-dark-finance-typography-and-spacing",
+      "title": "Add a 'Security Settings' section to `frontend/src/pages/ProfilePage.tsx` that renders both the `PasswordSetupModal` (triggered by a 'Set Password' button) and the `BiometricAuthButton` component. The section must only be visible to authenticated users and must be placed below the existing profile stats. Label the section 'Security & Authentication' with a lock icon, consistent with the platform's dark-finance typography and spacing.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-play-an-audible-notification-sound-in-the-frontend-when-market-alerts-are-first-loaded-or-when-new-critical-or-high-severity-alerts-are-detected-by-the-usemarketalerts-polling-hook-use-the-web-audio-api-to-synthesize-a-short-chime-beep-tone-no-external-audio-files-required-so-that-users-are-audibly-notified-of-urgent-market-events-the-sound-must-only-play-once-per-new-alert-track-previously-seen-alert-ids-in-a-ref-to-avoid-replaying-on-re-renders-or-routine-polls",
+      "title": "Play an audible notification sound in the frontend when market alerts are first loaded or when new 'critical' or 'high' severity alerts are detected by the `useMarketAlerts` polling hook. Use the Web Audio API to synthesize a short chime/beep tone (no external audio files required) so that users are audibly notified of urgent market events. The sound must only play once per new alert (track previously seen alert IDs in a ref to avoid replaying on re-renders or routine polls).",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-in-frontend-src-hooks-usequeries-ts-extend-the-usemarketalerts-hook-to-synthesize-and-play-a-short-chime-beep-tone-via-the-web-audio-api-whenever-new-critical-or-high-severity-alerts-are-detected-during-polling-track-previously-seen-alert-ids-in-a-useref-to-ensure-the-sound-plays-only-once-per-new-alert-and-does-not-replay-on-re-renders-or-routine-polls-that-return-the-same-alerts-no-external-audio-files-should-be-used-the-tone-must-be-generated-entirely-with-the-web-audio-api-e-g-an-oscillatornode-with-a-short-envelope",
+      "title": "In `frontend/src/hooks/useQueries.ts`, extend the `useMarketAlerts` hook to synthesize and play a short chime/beep tone via the Web Audio API whenever new 'critical' or 'high' severity alerts are detected during polling. Track previously seen alert IDs in a `useRef` to ensure the sound plays only once per new alert and does not replay on re-renders or routine polls that return the same alerts. No external audio files should be used — the tone must be generated entirely with the Web Audio API (e.g., an OscillatorNode with a short envelope).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-api-reference-page-at-frontend-src-pages-apireferencepage-tsx-that-documents-the-platform-s-available-public-backend-query-endpoints-getpublicnewsfeed-getpublicmarketalerts-getpublicstocklist-getpublicleaderboard-for-each-endpoint-display-its-name-description-return-type-schema-and-a-live-try-it-section-that-calls-the-endpoint-via-the-existing-actor-hook-and-renders-the-json-response-in-a-styled-code-block-style-using-the-platform-s-dark-finance-glassmorphism-theme-with-teal-gold-accents-consistent-with-glasscard",
+      "title": "Create an API reference page at `frontend/src/pages/ApiReferencePage.tsx` that documents the platform's available public backend query endpoints (`getPublicNewsFeed`, `getPublicMarketAlerts`, `getPublicStockList`, `getPublicLeaderboard`). For each endpoint display: its name, description, return type schema, and a live 'Try It' section that calls the endpoint via the existing actor hook and renders the JSON response in a styled code block. Style using the platform's dark-finance glassmorphism theme with teal/gold accents consistent with `GlassCard`.",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-navigation-link-labelled-api-to-the-topnav-component-frontend-src-components-topnav-tsx-that-routes-to-the-new-api-reference-page-the-link-must-appear-alongside-the-existing-module-links-and-follow-the-same-active-state-and-hover-styling-conventions-already-applied-to-other-nav-items",
+      "title": "Add a navigation link labelled 'API' to the `TopNav` component (`frontend/src/components/TopNav.tsx`) that routes to the new `/api` reference page. The link must appear alongside the existing module links and follow the same active-state and hover styling conventions already applied to other nav items.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-simulated-real-time-price-feed-mechanism-to-the-frontend-in-frontend-src-data-mockstocks-ts-add-a-utility-function-getliveprice-symbol-string-number-that-returns-a-mock-current-price-by-applying-a-small-random-walk-delta-0-5-to-the-stock-s-last-ohlcv-close-price-on-each-call-simulating-live-price-movement-export-a-useliveprice-symbol-string-intervalms-number-react-hook-that-uses-setinterval-default-3000ms-to-repeatedly-call-getliveprice-and-returns-the-current-price-the-previous-price-for-change-direction-and-the-percentage-change-since-the-session-started",
+      "title": "Add a simulated real-time price feed mechanism to the frontend. In `frontend/src/data/mockStocks.ts`, add a utility function `getLivePrice(symbol: string): number` that returns a mock current price by applying a small random walk delta (±0.5%) to the stock's last OHLCV close price on each call, simulating live price movement. Export a `useLivePrice(symbol: string, intervalMs?: number)` React hook that uses `setInterval` (default 3000ms) to repeatedly call `getLivePrice` and returns the current price, the previous price (for change direction), and the percentage change since the session started.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-livepriceticker-component-at-frontend-src-components-livepriceticker-tsx-this-component-accepts-a-symbol-prop-and-uses-the-useliveprice-hook-to-display-the-stock-symbol-the-current-live-price-formatted-to-2-decimal-places-the-absolute-price-change-and-the-percentage-change-since-session-start-color-the-price-green-when-trending-up-and-red-when-trending-down-with-a-subtle-animated-pulse-on-each-price-update-style-consistently-with-the-platform-s-teal-gold-dark-finance-glassmorphism-theme-using-glasscard",
+      "title": "Create a `LivePriceTicker` component at `frontend/src/components/LivePriceTicker.tsx`. This component accepts a `symbol` prop and uses the `useLivePrice` hook to display: the stock symbol, the current live price formatted to 2 decimal places, the absolute price change, and the percentage change since session start. Color the price green when trending up and red when trending down, with a subtle animated pulse on each price update. Style consistently with the platform's teal/gold dark-finance glassmorphism theme using `GlassCard`.",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-livepricechart-component-at-frontend-src-components-livepricechart-tsx-this-component-accepts-a-symbol-prop-and-maintains-a-rolling-buffer-of-the-last-60-live-price-ticks-sampled-every-3-seconds-using-a-useref-backed-array-updated-via-the-useliveprice-hook-render-the-buffered-price-series-as-a-real-time-updating-recharts-linechart-with-a-smooth-animated-line-no-x-axis-labels-just-time-ordered-ticks-a-y-axis-showing-the-price-range-a-referenceline-at-the-session-open-price-and-a-color-coded-line-teal-if-current-price-open-red-if-below-include-a-custom-tooltip-showing-price-and-relative-elapsed-time",
+      "title": "Create a `LivePriceChart` component at `frontend/src/components/LivePriceChart.tsx`. This component accepts a `symbol` prop and maintains a rolling buffer of the last 60 live price ticks (sampled every 3 seconds) using a `useRef`-backed array updated via the `useLivePrice` hook. Render the buffered price series as a real-time updating Recharts `LineChart` with a smooth animated line, no X-axis labels (just time-ordered ticks), a Y-axis showing the price range, a `ReferenceLine` at the session-open price, and a color-coded line (teal if current price ≥ open, red if below). Include a custom tooltip showing price and relative elapsed time.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-the-livepriceticker-and-livepricechart-components-into-frontend-src-pages-stockplaygroundpage-tsx-when-a-user-selects-a-stock-symbol-display-the-livepriceticker-for-that-symbol-prominently-above-the-prediction-form-and-render-the-livepricechart-below-or-beside-it-within-a-glasscard-so-the-user-can-observe-live-simulated-price-movement-before-submitting-their-prediction-the-existing-stockpricechart-historical-data-should-remain-visible-clearly-labelled-historical-price-while-the-new-live-chart-is-labelled-live-price",
+      "title": "Integrate the `LivePriceTicker` and `LivePriceChart` components into `frontend/src/pages/StockPlaygroundPage.tsx`. When a user selects a stock symbol, display the `LivePriceTicker` for that symbol prominently above the prediction form, and render the `LivePriceChart` below or beside it (within a `GlassCard`) so the user can observe live simulated price movement before submitting their prediction. The existing `StockPriceChart` (historical data) should remain visible, clearly labelled 'Historical Price', while the new live chart is labelled 'Live Price'.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-integrate-livepriceticker-components-into-frontend-src-pages-portfolioanalyzerpage-tsx-for-each-holding-displayed-in-the-holdings-table-list-render-a-livepriceticker-inline-showing-the-real-time-simulated-price-for-that-holding-s-stock-symbol-update-the-displayed-current-price-column-used-for-unrealized-gain-loss-calculations-to-use-the-live-price-from-useliveprice-so-that-total-portfolio-value-and-p-l-figures-refresh-in-real-time-as-prices-tick",
+      "title": "Integrate `LivePriceTicker` components into `frontend/src/pages/PortfolioAnalyzerPage.tsx`. For each holding displayed in the holdings table/list, render a `LivePriceTicker` inline showing the real-time simulated price for that holding's stock symbol. Update the displayed 'Current Price' column used for unrealized gain/loss calculations to use the live price from `useLivePrice` so that total portfolio value and P&L figures refresh in real time as prices tick.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "User Authentication & Profiles with progress tracking, prediction history, and portfolio insights",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Finance Learning & Assessment Module with structured lessons, assessments, and progress tracking",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Stock Prediction Playground: paper-trading arena with AI/ML predictions, user predictions, actual outcomes, and intelligent explanations",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Financial News Intelligence Module: live news feed with ML sentiment analysis and visual impact on market movement",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Portfolio Analyzer dashboard with allocation, performance, and risk exposure insights",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "AI Financial Strategy Advisor chatbot integrating news, portfolio, and prediction data for personalized guidance",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Web3 Authentication: decentralized login via crypto wallet integration (bonus)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Enhanced Interactive Visualizations: advanced charts for market-news relationships, portfolio, and stock playground (bonus)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Community Chat: real-time community forum for users to share trading and finance insights (bonus)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Lightweight real-time alert mechanism in the News Intelligence Module that notifies users when a major market-impacting event is detected",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Extend the Motoko backend to support a market alert data model. Define an Alert type with fields: id, headline, relatedSymbols (array of text), severity (e.g., 'critical' | 'high' | 'medium'), triggeredAt (timestamp), and sentimentScore (Float). Pre-seed at least 5 market-impacting alert events derived from the existing news articles whose absolute sentiment score exceeds a defined threshold (e.g., |score| >= 0.7). Expose a query endpoint `getMarketAlerts()` that returns all alerts sorted by most recent first.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Add password and fingerprint (biometric) authentication options to the user authentication system",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-13",
+      "summary": "Extend the backend authentication model to support a secondary PIN/password credential per user. Add a `passwordHash` optional field to the user profile record in `backend/main.mo`. Expose two new endpoints: `setUserPassword(passwordHash: Text) : async Bool` (stores a hashed password string for the authenticated caller) and `verifyUserPassword(passwordHash: Text) : async Bool` (checks the supplied hash against the stored value). The caller principal must already have a profile to set a password.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Add notification sound when market alerts are triggered or displayed",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Add more pre-seeded financial news articles to the News Intelligence Module",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Expand the pre-seeded financial news articles in the Motoko backend (`backend/main.mo`) from the current set to at least 35 total articles. New articles must include a title, summary, publication date, related stock symbols, and a sentiment score computed by the existing rule-based keyword scoring model. The additional articles should cover a diverse range of financial topics (e.g., earnings reports, Fed interest rate decisions, commodity price shifts, tech sector layoffs, IPO announcements, crypto regulation, energy market updates) and include both positive and negative sentiment examples to enrich the sentiment-impact timeline chart in the News Module.",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Add API integration to the backend or frontend",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Expose a set of public query endpoints in the Motoko backend (`backend/main.mo`) that act as a read-only API layer for external or frontend consumption. Include endpoints for: (1) `getPublicNewsFeed() : async [NewsArticle]` — returns all pre-seeded news articles with title, summary, date, relatedSymbols, and sentimentScore; (2) `getPublicMarketAlerts() : async [Alert]` — returns all market alerts sorted by most recent first; (3) `getPublicStockList() : async [StockSymbol]` — returns the list of supported mock stock symbols; (4) `getPublicLeaderboard() : async [LeaderboardEntry]` — returns anonymised top prediction accuracy stats (display name + accuracy rate, no principal exposed). All endpoints must be callable without authentication.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Add real-time stock price display and live price graph/chart across relevant modules (e.g., Stock Playground, Portfolio Analyzer)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "AI-Powered Finance Education & Investment Intelligence Platform",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

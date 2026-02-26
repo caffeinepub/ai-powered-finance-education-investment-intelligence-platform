@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    /* Dark finance theme - light mode still dark-ish */
+    --background: 0.13 0.008 240;
+    --foreground: 0.92 0.01 240;
+    --card: 0.17 0.01 240;
+    --card-foreground: 0.92 0.01 240;
+    --popover: 0.17 0.01 240;
+    --popover-foreground: 0.92 0.01 240;
+    --primary: 0.72 0.18 185;
+    --primary-foreground: 0.1 0.01 240;
+    --secondary: 0.22 0.015 240;
+    --secondary-foreground: 0.85 0.01 240;
+    --muted: 0.2 0.012 240;
+    --muted-foreground: 0.58 0.02 240;
+    --accent: 0.78 0.16 75;
+    --accent-foreground: 0.1 0.01 240;
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.28 0.015 240;
+    --input: 0.22 0.012 240;
+    --ring: 0.72 0.18 185;
+    --chart-1: 0.72 0.18 185;
+    --chart-2: 0.78 0.16 75;
+    --chart-3: 0.65 0.2 145;
+    --chart-4: 0.62 0.22 25;
+    --chart-5: 0.55 0.18 280;
+    --sidebar: 0.15 0.01 240;
+    --sidebar-foreground: 0.92 0.01 240;
+    --sidebar-primary: 0.72 0.18 185;
+    --sidebar-primary-foreground: 0.1 0.01 240;
+    --sidebar-accent: 0.22 0.015 240;
+    --sidebar-accent-foreground: 0.85 0.01 240;
+    --sidebar-border: 0.28 0.015 240;
+    --sidebar-ring: 0.72 0.18 185;
+    /* Custom tokens */
+    --teal: 0.72 0.18 185;
+    --gold: 0.78 0.16 75;
+    --glass-bg: oklch(0.17 0.01 240 / 0.7);
+    --glass-border: oklch(0.35 0.02 240 / 0.4);
+  }
+
+  .dark {
+    --background: 0.11 0.008 240;
+    --foreground: 0.93 0.01 240;
+    --card: 0.15 0.01 240;
+    --card-foreground: 0.93 0.01 240;
+    --popover: 0.15 0.01 240;
+    --popover-foreground: 0.93 0.01 240;
+    --primary: 0.72 0.18 185;
+    --primary-foreground: 0.1 0.01 240;
+    --secondary: 0.2 0.012 240;
+    --secondary-foreground: 0.85 0.01 240;
+    --muted: 0.18 0.01 240;
+    --muted-foreground: 0.55 0.02 240;
+    --accent: 0.78 0.16 75;
+    --accent-foreground: 0.1 0.01 240;
+    --destructive: 0.62 0.22 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.25 0.012 240;
+    --input: 0.2 0.01 240;
+    --ring: 0.72 0.18 185;
+    --chart-1: 0.72 0.18 185;
+    --chart-2: 0.78 0.16 75;
+    --chart-3: 0.65 0.2 145;
+    --chart-4: 0.62 0.22 25;
+    --chart-5: 0.55 0.18 280;
+    --sidebar: 0.13 0.01 240;
+    --sidebar-foreground: 0.93 0.01 240;
+    --sidebar-primary: 0.72 0.18 185;
+    --sidebar-primary-foreground: 0.1 0.01 240;
+    --sidebar-accent: 0.2 0.012 240;
+    --sidebar-accent-foreground: 0.85 0.01 240;
+    --sidebar-border: 0.25 0.012 240;
+    --sidebar-ring: 0.72 0.18 185;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer components {
+  .glass-card {
+    background: oklch(var(--card) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid oklch(var(--border) / 0.5);
+  }
+
+  .glass-nav {
+    background: oklch(var(--background) / 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid oklch(var(--border) / 0.4);
+  }
+
+  .teal-glow {
+    box-shadow: 0 0 20px oklch(var(--teal) / 0.3);
+  }
+
+  .gold-glow {
+    box-shadow: 0 0 20px oklch(var(--gold) / 0.3);
+  }
+
+  .gradient-teal {
+    background: linear-gradient(135deg, oklch(var(--teal) / 0.15), oklch(var(--teal) / 0.05));
+  }
+
+  .gradient-gold {
+    background: linear-gradient(135deg, oklch(var(--gold) / 0.15), oklch(var(--gold) / 0.05));
+  }
+
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-foreground rounded-md;
+  }
+
+  .nav-link.active {
+    @apply text-primary;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-primary scale-x-0 transition-transform duration-200 rounded-full;
+  }
+
+  .nav-link.active::after {
+    @apply scale-x-100;
+  }
+
+  .btn-teal {
+    background: oklch(var(--teal));
+    color: oklch(0.1 0.01 240);
+    @apply font-semibold px-4 py-2 rounded-md transition-all duration-200 hover:opacity-90 active:scale-95;
+  }
+
+  .btn-gold {
+    background: oklch(var(--gold));
+    color: oklch(0.1 0.01 240);
+    @apply font-semibold px-4 py-2 rounded-md transition-all duration-200 hover:opacity-90 active:scale-95;
+  }
+
+  .sentiment-positive {
+    @apply text-emerald-400 bg-emerald-400/10 border border-emerald-400/20;
+  }
+
+  .sentiment-negative {
+    @apply text-red-400 bg-red-400/10 border border-red-400/20;
+  }
+
+  .sentiment-neutral {
+    @apply text-yellow-400 bg-yellow-400/10 border border-yellow-400/20;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: oklch(var(--border));
+    border-radius: 2px;
+  }
+
+  /* Price flash animation for live price updates */
+  .price-flash {
+    animation: price-flash 0.35s ease-out;
+  }
+}
+
+@layer utilities {
+  .text-teal {
+    color: oklch(var(--teal));
+  }
+
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+
+  .bg-teal {
+    background-color: oklch(var(--teal));
+  }
+
+  .bg-gold {
+    background-color: oklch(var(--gold));
+  }
+
+  .border-teal {
+    border-color: oklch(var(--teal) / 0.4);
+  }
+
+  .border-gold {
+    border-color: oklch(var(--gold) / 0.4);
+  }
+}
+
+@keyframes price-flash {
+  0% {
+    opacity: 0.4;
+    transform: scale(1.06);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
