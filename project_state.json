@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
+  "projectStateVersion": 21,
   "summary": "AI-Powered Finance Education & Investment Intelligence Platform — a full-stack web app integrating financial learning, stock prediction playground, news intelligence, portfolio analysis, and an AI chatbot advisor into a unified ecosystem.",
   "architectural_notes": [
     "Separate frontend and backend clearly; use a modern stack (e.g., React + Node/FastAPI)",
@@ -341,6 +341,22 @@
       "id": "AR-20",
       "summary": "Add real-time stock price display and live price graph/chart across relevant modules (e.g., Stock Playground, Portfolio Analyzer)",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Expand the pre-seeded financial news articles in `backend/main.mo` to at least 35 total articles. Each new article must include a title, summary, publication date, related stock symbols, and a sentiment score computed by the existing rule-based keyword scoring model. New articles must cover a diverse range of financial topics including earnings reports, Fed interest rate decisions, commodity price shifts, tech sector layoffs, IPO announcements, crypto regulation, energy market updates, and macroeconomic indicators. Include both positive and negative sentiment examples to enrich the sentiment-impact timeline chart in the News Module.",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Expand the pre-seeded financial news articles in `backend/main.mo` to at least 50 total articles. Each new article must include a title, summary, publication date, related stock symbols, and a sentiment score computed by the existing rule-based keyword scoring model. New articles must cover a diverse range of financial topics including earnings reports, Fed interest rate decisions, commodity price shifts, tech sector layoffs, IPO announcements, crypto regulation, energy market updates, macroeconomic indicators, and geopolitical market impacts. Include both positive and negative sentiment examples to enrich the sentiment-impact timeline chart in the News Module.",
+      "reqIds": [
+        "REQ-32"
+      ],
       "status": "pending"
     }
   ],

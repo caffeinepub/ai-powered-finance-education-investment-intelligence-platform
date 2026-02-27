@@ -100,9 +100,12 @@ export type UserRole = { 'admin' : null } |
   { 'guest' : null };
 export interface _SERVICE {
   '_initializeAccessControlWithSecret' : ActorMethod<[string], undefined>,
-  'addNewsArticle' : ActorMethod<[NewsArticle], undefined>,
+  'addNewsArticleWithScore' : ActorMethod<[NewsArticle], undefined>,
   'assignCallerUserRole' : ActorMethod<[Principal, UserRole], undefined>,
   'createPost' : ActorMethod<[string, Array<string>], undefined>,
+  'getArticlesByDateRange' : ActorMethod<[Time, Time], Array<NewsArticle>>,
+  'getArticlesBySentiment' : ActorMethod<[string], Array<NewsArticle>>,
+  'getArticlesBySymbol' : ActorMethod<[string], Array<NewsArticle>>,
   'getCallerUserProfile' : ActorMethod<[], [] | [UserProfileView]>,
   'getCallerUserRole' : ActorMethod<[], UserRole>,
   'getConversation' : ActorMethod<[], [] | [Conversation]>,
@@ -116,9 +119,20 @@ export interface _SERVICE {
   'getPublicMarketAlerts' : ActorMethod<[], Array<Alert>>,
   'getPublicNewsFeed' : ActorMethod<[], Array<NewsArticle>>,
   'getPublicStockList' : ActorMethod<[], Array<StockSymbol>>,
+  'getSentimentImpactTimeline' : ActorMethod<[string], Array<[Time, bigint]>>,
+  'getSummaryStatistics' : ActorMethod<
+    [],
+    {
+      'negativeCount' : bigint,
+      'positiveCount' : bigint,
+      'neutralCount' : bigint,
+      'averageScore' : number,
+    }
+  >,
   'getTopPosts' : ActorMethod<[], Array<Post>>,
   'getUserPredictions' : ActorMethod<[], Array<Prediction>>,
   'getUserProfile' : ActorMethod<[Principal], [] | [UserProfileView]>,
+  'initializeNewsDatabase' : ActorMethod<[], undefined>,
   'isCallerAdmin' : ActorMethod<[], boolean>,
   'saveCallerUserProfile' : ActorMethod<[UserProfileInput], undefined>,
   'saveLearningProgress' : ActorMethod<[LearningProgress], undefined>,

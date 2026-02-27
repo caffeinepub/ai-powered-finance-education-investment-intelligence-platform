@@ -26,7 +26,7 @@ export default function TopNav() {
   const navigate = useNavigate();
   const currentPath = routerState.location.pathname;
 
-  const urgentAlertCount = alerts.filter(
+  const urgentAlertCount = (alerts ?? []).filter(
     a =>
       a.severity === Variant_high_critical_medium.critical ||
       a.severity === Variant_high_critical_medium.high

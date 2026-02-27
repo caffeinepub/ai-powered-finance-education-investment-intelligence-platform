@@ -103,9 +103,24 @@ export const LearningProgress = IDL.Record({
 
 export const idlService = IDL.Service({
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
-  'addNewsArticle' : IDL.Func([NewsArticle], [], []),
+  'addNewsArticleWithScore' : IDL.Func([NewsArticle], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
   'createPost' : IDL.Func([IDL.Text, IDL.Vec(IDL.Text)], [], []),
+  'getArticlesByDateRange' : IDL.Func(
+      [Time, Time],
+      [IDL.Vec(NewsArticle)],
+      ['query'],
+    ),
+  'getArticlesBySentiment' : IDL.Func(
+      [IDL.Text],
+      [IDL.Vec(NewsArticle)],
+      ['query'],
+    ),
+  'getArticlesBySymbol' : IDL.Func(
+      [IDL.Text],
+      [IDL.Vec(NewsArticle)],
+      ['query'],
+    ),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfileView)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
   'getConversation' : IDL.Func([], [IDL.Opt(Conversation)], ['query']),
@@ -123,6 +138,23 @@ export const idlService = IDL.Service({
   'getPublicMarketAlerts' : IDL.Func([], [IDL.Vec(Alert)], ['query']),
   'getPublicNewsFeed' : IDL.Func([], [IDL.Vec(NewsArticle)], ['query']),
   'getPublicStockList' : IDL.Func([], [IDL.Vec(StockSymbol)], ['query']),
+  'getSentimentImpactTimeline' : IDL.Func(
+      [IDL.Text],
+      [IDL.Vec(IDL.Tuple(Time, IDL.Int))],
+      ['query'],
+    ),
+  'getSummaryStatistics' : IDL.Func(
+      [],
+      [
+        IDL.Record({
+          'negativeCount' : IDL.Nat,
+          'positiveCount' : IDL.Nat,
+          'neutralCount' : IDL.Nat,
+          'averageScore' : IDL.Float64,
+        }),
+      ],
+      ['query'],
+    ),
   'getTopPosts' : IDL.Func([], [IDL.Vec(Post)], ['query']),
   'getUserPredictions' : IDL.Func([], [IDL.Vec(Prediction)], ['query']),
   'getUserProfile' : IDL.Func(
@@ -130,6 +162,7 @@ export const idlService = IDL.Service({
       [IDL.Opt(UserProfileView)],
       ['query'],
     ),
+  'initializeNewsDatabase' : IDL.Func([], [], []),
   'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
   'saveCallerUserProfile' : IDL.Func([UserProfileInput], [], []),
   'saveLearningProgress' : IDL.Func([LearningProgress], [], []),
@@ -239,9 +272,24 @@ export const idlFactory = ({ IDL }) => {
   
   return IDL.Service({
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
-    'addNewsArticle' : IDL.Func([NewsArticle], [], []),
+    'addNewsArticleWithScore' : IDL.Func([NewsArticle], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
     'createPost' : IDL.Func([IDL.Text, IDL.Vec(IDL.Text)], [], []),
+    'getArticlesByDateRange' : IDL.Func(
+        [Time, Time],
+        [IDL.Vec(NewsArticle)],
+        ['query'],
+      ),
+    'getArticlesBySentiment' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(NewsArticle)],
+        ['query'],
+      ),
+    'getArticlesBySymbol' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(NewsArticle)],
+        ['query'],
+      ),
     'getCallerUserProfile' : IDL.Func(
         [],
         [IDL.Opt(UserProfileView)],
@@ -267,6 +315,23 @@ export const idlFactory = ({ IDL }) => {
     'getPublicMarketAlerts' : IDL.Func([], [IDL.Vec(Alert)], ['query']),
     'getPublicNewsFeed' : IDL.Func([], [IDL.Vec(NewsArticle)], ['query']),
     'getPublicStockList' : IDL.Func([], [IDL.Vec(StockSymbol)], ['query']),
+    'getSentimentImpactTimeline' : IDL.Func(
+        [IDL.Text],
+        [IDL.Vec(IDL.Tuple(Time, IDL.Int))],
+        ['query'],
+      ),
+    'getSummaryStatistics' : IDL.Func(
+        [],
+        [
+          IDL.Record({
+            'negativeCount' : IDL.Nat,
+            'positiveCount' : IDL.Nat,
+            'neutralCount' : IDL.Nat,
+            'averageScore' : IDL.Float64,
+          }),
+        ],
+        ['query'],
+      ),
     'getTopPosts' : IDL.Func([], [IDL.Vec(Post)], ['query']),
     'getUserPredictions' : IDL.Func([], [IDL.Vec(Prediction)], ['query']),
     'getUserProfile' : IDL.Func(
@@ -274,6 +339,7 @@ export const idlFactory = ({ IDL }) => {
         [IDL.Opt(UserProfileView)],
         ['query'],
       ),
+    'initializeNewsDatabase' : IDL.Func([], [], []),
     'isCallerAdmin' : IDL.Func([], [IDL.Bool], ['query']),
     'saveCallerUserProfile' : IDL.Func([UserProfileInput], [], []),
     'saveLearningProgress' : IDL.Func([LearningProgress], [], []),

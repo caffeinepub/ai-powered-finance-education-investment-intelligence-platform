@@ -104,9 +104,12 @@ export enum Variant_high_critical_medium {
     medium = "medium"
 }
 export interface backendInterface {
-    addNewsArticle(article: NewsArticle): Promise<void>;
+    addNewsArticleWithScore(article: NewsArticle): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createPost(content: string, symbols: Array<string>): Promise<void>;
+    getArticlesByDateRange(startTime: Time, endTime: Time): Promise<Array<NewsArticle>>;
+    getArticlesBySentiment(sentiment: string): Promise<Array<NewsArticle>>;
+    getArticlesBySymbol(symbol: string): Promise<Array<NewsArticle>>;
     getCallerUserProfile(): Promise<UserProfileView | null>;
     getCallerUserRole(): Promise<UserRole>;
     getConversation(): Promise<Conversation | null>;
@@ -120,9 +123,17 @@ export interface backendInterface {
     getPublicMarketAlerts(): Promise<Array<Alert>>;
     getPublicNewsFeed(): Promise<Array<NewsArticle>>;
     getPublicStockList(): Promise<Array<StockSymbol>>;
+    getSentimentImpactTimeline(symbol: string): Promise<Array<[Time, bigint]>>;
+    getSummaryStatistics(): Promise<{
+        negativeCount: bigint;
+        positiveCount: bigint;
+        neutralCount: bigint;
+        averageScore: number;
+    }>;
     getTopPosts(): Promise<Array<Post>>;
     getUserPredictions(): Promise<Array<Prediction>>;
     getUserProfile(user: Principal): Promise<UserProfileView | null>;
+    initializeNewsDatabase(): Promise<void>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profileInput: UserProfileInput): Promise<void>;
     saveLearningProgress(progress: LearningProgress): Promise<void>;

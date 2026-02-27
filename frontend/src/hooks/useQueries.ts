@@ -170,6 +170,70 @@ export function useGetNewsArticle(id: bigint) {
   });
 }
 
+export function useAddNewsArticle() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (article: NewsArticle) => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.addNewsArticleWithScore(article);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['newsArticles'] });
+    },
+  });
+}
+
+export function useInitializeNewsDatabase() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.initializeNewsDatabase();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['newsArticles'] });
+    },
+  });
+}
+
+export function useIsCallerAdmin() {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<boolean>({
+    queryKey: ['isCallerAdmin'],
+    queryFn: async () => {
+      if (!actor) return false;
+      return actor.isCallerAdmin();
+    },
+    enabled: !!actor && !actorFetching,
+    retry: false,
+  });
+}
+
+// ─── Summary Statistics ───────────────────────────────────────────────────────
+
+export function useGetSummaryStatistics() {
+  const { actor, isFetching: actorFetching } = useActor();
+
+  return useQuery<{
+    negativeCount: bigint;
+    positiveCount: bigint;
+    neutralCount: bigint;
+    averageScore: number;
+  } | null>({
+    queryKey: ['summaryStatistics'],
+    queryFn: async () => {
+      if (!actor) throw new Error('Actor not available');
+      return actor.getSummaryStatistics();
+    },
+    enabled: !!actor && !actorFetching,
+  });
+}
+
 // ─── Portfolio ────────────────────────────────────────────────────────────────
 
 export function useGetPortfolio() {
@@ -301,7 +365,6 @@ function playAlertChime(): void {
       oscillator.type = 'sine';
       oscillator.frequency.setValueAtTime(frequency, startTime);
 
-      // Envelope: quick attack, short sustain, smooth release
       gainNode.gain.setValueAtTime(0, startTime);
       gainNode.gain.linearRampToValueAtTime(gainPeak, startTime + 0.02);
       gainNode.gain.setValueAtTime(gainPeak, startTime + duration * 0.4);
@@ -317,12 +380,9 @@ function playAlertChime(): void {
     };
 
     const now = ctx.currentTime;
-    // First note: higher pitch
     playTone(880, now, 0.18, 0.35);
-    // Second note: slightly lower, overlapping
     playTone(1100, now + 0.12, 0.22, 0.28);
 
-    // Close context after chime finishes to free resources
     setTimeout(() => {
       ctx.close().catch(() => {});
     }, 600);
@@ -334,9 +394,7 @@ function playAlertChime(): void {
 export function useMarketAlerts() {
   const { actor, isFetching: actorFetching } = useActor();
 
-  // Track alert IDs that have already triggered a sound
   const seenAlertIdsRef = useRef<Set<string>>(new Set());
-  // Track whether this is the very first successful fetch (skip sound on initial load)
   const isFirstFetchRef = useRef<boolean>(true);
 
   const query = useQuery<Alert[]>({
@@ -352,42 +410,30 @@ export function useMarketAlerts() {
   useEffect(() => {
     if (!query.data) return;
 
-    const alerts = query.data;
-
-    // Filter to only critical/high severity alerts
-    const urgentAlerts = alerts.filter(
-      (alert) =>
-        alert.severity === Variant_high_critical_medium.critical ||
-        alert.severity === Variant_high_critical_medium.high
-    );
-
     if (isFirstFetchRef.current) {
-      // On the first successful fetch, just record all existing IDs without playing sound
-      urgentAlerts.forEach((alert) => {
-        seenAlertIdsRef.current.add(alert.id.toString());
-      });
+      // On first load, just record all existing IDs without playing sound
+      query.data.forEach(alert => seenAlertIdsRef.current.add(alert.id.toString()));
       isFirstFetchRef.current = false;
       return;
     }
 
-    // Find any urgent alerts we haven't seen before
-    const newUrgentAlerts = urgentAlerts.filter(
-      (alert) => !seenAlertIdsRef.current.has(alert.id.toString())
-    );
+    // On subsequent fetches, check for new critical/high alerts
+    let hasNewUrgentAlert = false;
+    query.data.forEach(alert => {
+      const idStr = alert.id.toString();
+      if (!seenAlertIdsRef.current.has(idStr)) {
+        seenAlertIdsRef.current.add(idStr);
+        const sev = alert.severity as unknown as { high?: null; critical?: null; medium?: null };
+        if (Variant_high_critical_medium.critical in sev || Variant_high_critical_medium.high in sev) {
+          hasNewUrgentAlert = true;
+        }
+      }
+    });
 
-    if (newUrgentAlerts.length > 0) {
-      // Mark them as seen
-      newUrgentAlerts.forEach((alert) => {
-        seenAlertIdsRef.current.add(alert.id.toString());
-      });
-      // Play the notification chime once for all new urgent alerts
+    if (hasNewUrgentAlert) {
       playAlertChime();
     }
   }, [query.data]);
 
-  return {
-    ...query,
-    data: query.data ?? [],
-    isLoading: actorFetching || query.isLoading,
-  };
+  return query;
 }

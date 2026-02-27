@@ -187,9 +187,12 @@ export enum Variant_high_critical_medium {
 }
 export interface backendInterface {
     _initializeAccessControlWithSecret(userSecret: string): Promise<void>;
-    addNewsArticle(article: NewsArticle): Promise<void>;
+    addNewsArticleWithScore(article: NewsArticle): Promise<void>;
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
     createPost(content: string, symbols: Array<string>): Promise<void>;
+    getArticlesByDateRange(startTime: Time, endTime: Time): Promise<Array<NewsArticle>>;
+    getArticlesBySentiment(sentiment: string): Promise<Array<NewsArticle>>;
+    getArticlesBySymbol(symbol: string): Promise<Array<NewsArticle>>;
     getCallerUserProfile(): Promise<UserProfileView | null>;
     getCallerUserRole(): Promise<UserRole>;
     getConversation(): Promise<Conversation | null>;
@@ -203,9 +206,17 @@ export interface backendInterface {
     getPublicMarketAlerts(): Promise<Array<Alert>>;
     getPublicNewsFeed(): Promise<Array<NewsArticle>>;
     getPublicStockList(): Promise<Array<StockSymbol>>;
+    getSentimentImpactTimeline(symbol: string): Promise<Array<[Time, bigint]>>;
+    getSummaryStatistics(): Promise<{
+        negativeCount: bigint;
+        positiveCount: bigint;
+        neutralCount: bigint;
+        averageScore: number;
+    }>;
     getTopPosts(): Promise<Array<Post>>;
     getUserPredictions(): Promise<Array<Prediction>>;
     getUserProfile(user: Principal): Promise<UserProfileView | null>;
+    initializeNewsDatabase(): Promise<void>;
     isCallerAdmin(): Promise<boolean>;
     saveCallerUserProfile(profileInput: UserProfileInput): Promise<void>;
     saveLearningProgress(progress: LearningProgress): Promise<void>;
@@ -233,17 +244,17 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async addNewsArticle(arg0: NewsArticle): Promise<void> {
+    async addNewsArticleWithScore(arg0: NewsArticle): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.addNewsArticle(arg0);
+                const result = await this.actor.addNewsArticleWithScore(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.addNewsArticle(arg0);
+            const result = await this.actor.addNewsArticleWithScore(arg0);
             return result;
         }
     }
@@ -272,6 +283,48 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.createPost(arg0, arg1);
+            return result;
+        }
+    }
+    async getArticlesByDateRange(arg0: Time, arg1: Time): Promise<Array<NewsArticle>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getArticlesByDateRange(arg0, arg1);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getArticlesByDateRange(arg0, arg1);
+            return result;
+        }
+    }
+    async getArticlesBySentiment(arg0: string): Promise<Array<NewsArticle>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getArticlesBySentiment(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getArticlesBySentiment(arg0);
+            return result;
+        }
+    }
+    async getArticlesBySymbol(arg0: string): Promise<Array<NewsArticle>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getArticlesBySymbol(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getArticlesBySymbol(arg0);
             return result;
         }
     }
@@ -457,6 +510,39 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getSentimentImpactTimeline(arg0: string): Promise<Array<[Time, bigint]>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getSentimentImpactTimeline(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getSentimentImpactTimeline(arg0);
+            return result;
+        }
+    }
+    async getSummaryStatistics(): Promise<{
+        negativeCount: bigint;
+        positiveCount: bigint;
+        neutralCount: bigint;
+        averageScore: number;
+    }> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getSummaryStatistics();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getSummaryStatistics();
+            return result;
+        }
+    }
     async getTopPosts(): Promise<Array<Post>> {
         if (this.processError) {
             try {
@@ -497,6 +583,20 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.getUserProfile(arg0);
             return from_candid_opt_n3(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async initializeNewsDatabase(): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.initializeNewsDatabase();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.initializeNewsDatabase();
+            return result;
         }
     }
     async isCallerAdmin(): Promise<boolean> {

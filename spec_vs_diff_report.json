@@ -1,52 +1,67 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-26T20:22:40.477Z",
-  "summary": "The diff implements all five requirements (REQ-26 through REQ-30). The core hook (useLivePrice), utility function (getLivePrice), LivePriceTicker component, LivePriceChart component, and integrations into StockPlaygroundPage and PortfolioAnalyzerPage are all present. However, there is one notable gap: the useLivePrice hook is placed in frontend/src/hooks/useLivePrice.ts rather than in frontend/src/data/mockStocks.ts as specified in REQ-26. The getLivePrice function appears to be added to mockStocks.ts, but the hook itself is extracted to a separate file. Additionally, the useLivePrice hook returns extra fields beyond what was specified.",
-  "missing_requirements": [
-    {
-      "id": "REQ-26",
-      "requirement": "Export the useLivePrice hook from frontend/src/data/mockStocks.ts (not a separate hooks file).",
-      "reason": "The spec explicitly states to export the useLivePrice hook from frontend/src/data/mockStocks.ts, but the diff places the hook in frontend/src/hooks/useLivePrice.ts instead.",
-      "evidence": [
-        "frontend/src/hooks/useLivePrice.ts",
-        "frontend/src/data/mockStocks.ts"
-      ]
-    }
-  ],
+  "generatedAt": "2026-02-27T01:10:34.199Z",
+  "summary": "The build request explicitly states that all core modules are already fully implemented and that no new requirements are needed. The diff shows various file modifications and one new file (AdvisorPage.tsx), but since there are zero requirements to verify against, there are no missing requirements. However, several new features appear in the diff that go beyond merely confirming existing coverage, including a new API Reference Page, password setup/biometric auth UI, and a getSummaryStatistics hook — none of which were requested even implicitly.",
+  "missing_requirements": [],
   "hallucinated_features": [
     {
-      "description": "The useLivePrice hook returns additional fields sessionOpenPrice and absoluteChange beyond the specified interface of price, previousPrice, changePercent, and isUp.",
-      "reason": "REQ-26 specifies the hook returns only price, previousPrice, changePercent, and isUp. The implementation adds sessionOpenPrice and absoluteChange which were not requested.",
+      "description": "New ApiReferencePage added with interactive 'Run Query' buttons, collapsible return schemas, live JSON response display for four public backend endpoints",
+      "reason": "No requirement in the build request asks for an API reference page. The build request states no new requirements are needed and lists only confirmation of existing features.",
       "evidence": [
-        "frontend/src/hooks/useLivePrice.ts"
+        "frontend/src/pages/ApiReferencePage.tsx",
+        "frontend/src/App.tsx",
+        "frontend-file-summaries.txt"
       ]
     },
     {
-      "description": "LivePriceTicker accepts a compact prop rendering a condensed inline variant.",
-      "reason": "REQ-27 does not specify a compact mode or alternate rendering variant for the LivePriceTicker component.",
+      "description": "New PasswordSetupModal component with SHA-256 hashing, strength indicator, and success confirmation screen",
+      "reason": "Not mentioned in any requirement. The build request explicitly prohibits re-implementing or adding modules beyond the four listed core features.",
       "evidence": [
-        "frontend/src/components/LivePriceTicker.tsx"
+        "frontend/src/components/PasswordSetupModal.tsx",
+        "frontend-file-summaries.txt"
       ]
     },
     {
-      "description": "LivePriceChart accepts a configurable height prop.",
-      "reason": "REQ-28 does not mention a configurable height prop for the LivePriceChart component.",
+      "description": "BiometricAuthButton component using WebAuthn for biometric authentication",
+      "reason": "Not requested in the build request. Biometric authentication is a new feature not listed among the confirmed existing features.",
       "evidence": [
-        "frontend/src/components/LivePriceChart.tsx"
+        "frontend/src/components/BiometricAuthButton.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "New Security and Authentication section on ProfilePage with password setup button and BiometricAuthButton",
+      "reason": "Not part of any stated requirement or existing confirmed feature. This is a newly introduced UI section.",
+      "evidence": [
+        "frontend/src/pages/ProfilePage.tsx",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "New useGetSummaryStatistics hook calling actor.getSummaryStatistics()",
+      "reason": "No requirement mentions a summary statistics endpoint or hook. This is a new feature not included in the confirmed existing feature list.",
+      "evidence": [
+        "frontend/src/hooks/useQueries.ts",
+        "frontend-file-summaries.txt"
+      ]
+    },
+    {
+      "description": "Backend password management functions setUserPassword and verifyUserPassword with UserProfileInput type separation",
+      "reason": "Password management is not listed among the four confirmed core modules the build request says are already live. This represents new backend functionality not requested.",
+      "evidence": [
+        "backend/main.mo"
       ]
     }
   ],
-  "confidence": 0.8,
+  "confidence": 0.78,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/components/LivePriceChart.tsx",
-    "frontend/src/components/LivePriceTicker.tsx",
-    "frontend/src/data/mockStocks.ts",
-    "frontend/src/hooks/useLivePrice.ts",
-    "frontend/src/index.css",
+    "frontend/src/hooks/useQueries.ts",
+    "frontend/src/pages/AdvisorPage.tsx",
+    "frontend/src/pages/NewsModulePage.tsx",
     "frontend/src/pages/PortfolioAnalyzerPage.tsx",
-    "frontend/src/pages/StockPlaygroundPage.tsx",
     "project_state.json"
   ]
 }
