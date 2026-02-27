@@ -1,16 +1,142 @@
 {
   "kind": "build_request",
-  "title": "All core modules already implemented — confirm existing feature coverage",
+  "title": "Apply unique, distinctive visual design across the platform",
+  "projectName": "FinMind AI",
   "priority": "normal",
-  "requirements": [],
+  "requirements": [
+    {
+      "id": "REQ-33",
+      "text": "Redesign the global CSS design system in `frontend/src/index.css` and `frontend/tailwind.config.js` to introduce a truly distinctive visual identity that departs from the current standard dark-finance teal/gold palette. Adopt a new signature color scheme — for example a deep indigo-black base with neon violet and electric lime accents, or a slate-obsidian base with aurora-gradient accents (cyan-to-magenta) — defined as OKLCH custom properties. Redefine typography scale, spacing rhythm, and border-radius tokens to feel editorial and premium rather than generic. All existing color token references (--primary, --accent, chart colors, etc.) must be remapped to the new palette so every component inherits the change automatically without file-by-file edits.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "design it unique"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The platform's base background, primary accent, and secondary accent colors are visibly distinct from the previous teal/gold-on-dark-charcoal scheme.",
+        "CSS custom properties in `frontend/src/index.css` are fully remapped to the new palette.",
+        "`frontend/tailwind.config.js` color tokens match the new palette.",
+        "No hardcoded old teal/gold hex or oklch values remain in the global stylesheet.",
+        "All pages render without broken color references or unstyled elements."
+      ]
+    },
+    {
+      "id": "REQ-34",
+      "text": "Redesign the `GlassCard` component (`frontend/src/components/GlassCard.tsx`) to use a distinctive glassmorphism treatment aligned with the new color palette: replace standard backdrop-blur cards with layered frosted-glass panels that include a subtle gradient border rendered via a pseudo-element or box-shadow stack (e.g., inner highlight on top edge, colored glow on bottom). Add a new `variant` prop value `'aurora'` that applies an animated gradient shimmer along the card border using a CSS keyframe, giving premium interactive cards a living, iridescent feel.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "design it unique"
+        ]
+      },
+      "acceptanceCriteria": [
+        "`GlassCard` renders with the new layered frosted-glass visual treatment.",
+        "The `variant='aurora'` prop triggers a visible animated gradient border shimmer.",
+        "Existing usages of `GlassCard` without the new prop continue to render without errors.",
+        "The card style is visually distinct from the previous version."
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "text": "Overhaul the `TopNav` component (`frontend/src/components/TopNav.tsx`) with a unique navigation aesthetic: replace the current flat/minimal bar with a frosted-glass nav strip that features a left-side animated logo mark, nav links styled as pill-shaped tabs with an active indicator that slides between them using a CSS transition, and a right-side cluster of utility icons (bell, profile) arranged with distinct spacing. Apply the new signature accent colors for active and hover states. The nav must remain sticky and fully responsive with a hamburger menu on mobile.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "design it unique"
+        ]
+      },
+      "acceptanceCriteria": [
+        "TopNav displays pill-shaped nav tabs with an animated sliding active indicator.",
+        "Active and hover states use the new signature accent colors.",
+        "The nav remains sticky and collapses to a hamburger menu on mobile viewports.",
+        "Logo mark is visible on the left side of the nav."
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "text": "Redesign the `HomePage` (`frontend/src/pages/HomePage.tsx`) hero section with a visually striking layout: replace the current hero banner image with an animated SVG or CSS-based abstract data-visualization motif (e.g., flowing particle lines or animated candlestick silhouettes) rendered directly in the DOM using inline SVG or a CSS keyframe animation. Apply a large editorial headline with a gradient text clip effect using the new accent colors. Module feature cards in the grid below the hero must use the updated `GlassCard` aurora variant and include distinct micro-interaction hover states (e.g., card tilt via `perspective` + `rotateX/Y` on hover).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "design it unique"
+        ]
+      },
+      "acceptanceCriteria": [
+        "The hero section renders an animated SVG or CSS-based abstract motif instead of a static image.",
+        "The headline text has a visible gradient clip effect using the new accent colors.",
+        "Feature cards use the `GlassCard` aurora variant and exhibit a 3D tilt micro-interaction on hover.",
+        "The overall hero layout is visually distinct from the previous version."
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "text": "Apply a consistent set of unique micro-interaction and motion design tokens across all interactive elements platform-wide. Define CSS keyframe animations for: (1) a `--anim-enter` fade-slide-up for page sections and cards on mount, (2) a `--anim-pulse-accent` glow pulse for CTA buttons using the new accent color, and (3) a `--anim-number-tick` counter animation for stat/metric displays (learning progress %, portfolio value, prediction accuracy). Apply `--anim-enter` to all `GlassCard` instances, apply the glow pulse to all primary action buttons, and apply the number tick to all numeric KPI values displayed on the Profile, Portfolio, and Prediction pages.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "design it unique"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All GlassCard instances animate in with a fade-slide-up effect on first render.",
+        "Primary action buttons exhibit a glow-pulse animation using the new accent color.",
+        "Numeric KPI values on ProfilePage, PortfolioAnalyzerPage, and StockPlaygroundPage display a counting/tick animation when their value changes.",
+        "Animations are smooth and do not cause layout shifts."
+      ]
+    },
+    {
+      "id": "REQ-38",
+      "text": "Generate a new platform logo mark and hero banner that match the new unique visual identity (non-teal/gold). The logo mark should be an abstract geometric icon evoking neural networks or data flows with the new accent color palette. The hero banner should be a wide dark-background abstract composition using the new signature colors with subtle depth and motion cues. Also generate a new default avatar placeholder image consistent with the new palette.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "design it unique"
+        ]
+      },
+      "acceptanceCriteria": [
+        "New logo mark asset is placed in `frontend/public/assets/generated/` and rendered in TopNav.",
+        "New hero banner asset is placed in `frontend/public/assets/generated/` and used on HomePage.",
+        "New default avatar placeholder is placed in `frontend/public/assets/generated/` and used as fallback avatar.",
+        "All three assets visually align with the new signature color palette."
+      ]
+    }
+  ],
   "constraints": [
-    "All requested features (Financial News Intelligence Module, Portfolio Analyzer, AI Financial Strategy Advisor, and Drastic Event Alert / Market Alerts) are already fully implemented in the current codebase as confirmed by the existing feature list and project state. No new requirements are needed."
+    "Do not modify any file listed under frontend.immutablePaths: useInternetIdentity.ts, useActor.ts, main.tsx, frontend/src/components/ui.",
+    "All functional features (authentication, data fetching, charting, navigation routing) must continue to work after the visual redesign.",
+    "Do not alter backend/main.mo as part of this design change."
   ],
   "nonGoals": [
-    "Re-implementing or duplicating any of the already-built modules: Financial News Intelligence Module (feature already live with sentiment analysis, sentiment-impact chart, and 50+ seeded articles), Portfolio Analyzer dashboard (already live with allocation/performance/risk charts and live price integration), AI Financial Strategy Advisor chatbot (already live with portfolio, prediction, and news context), Market Alert / Drastic Event Alert system (already live with backend alert model, getMarketAlerts endpoint, MarketAlertBanner component, bell icon in TopNav, polling hook with Web Audio API chime, and severity-based UI)."
+    "Adding new functional features or backend endpoints.",
+    "Changing routing structure or page component hierarchy.",
+    "Replacing Recharts with a different charting library.",
+    "Modifying the Motoko backend."
   ],
   "imageRequirements": {
-    "required": [],
+    "required": [
+      "Abstract geometric logo mark icon evoking neural network or data flow nodes, rendered in vivid violet and electric lime on a near-black background, with glowing node dots and connecting lines (logo-mark-new.dim_128x128.png)",
+      "Wide dark hero banner with abstract flowing data-stream or particle field motif in deep indigo-black with aurora violet-to-lime gradient highlights, cinematic depth and subtle bokeh (hero-banner-new.dim_1440x600.png)",
+      "Minimalist default user avatar placeholder with an abstract faceless silhouette rendered in the new violet/lime accent palette on a dark frosted-glass circle background (avatar-placeholder-new.dim_128x128.png)"
+    ],
     "edits": []
   }
 }

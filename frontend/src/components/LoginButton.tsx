@@ -37,8 +37,14 @@ export default function LoginButton({ displayName, compact = false }: LoginButto
   if (isAuthenticated && !compact) {
     return (
       <div className="flex items-center gap-2">
-        <Avatar className="h-8 w-8 border border-primary/30">
-          <AvatarImage src="/assets/generated/default-avatar.dim_128x128.png" alt="User avatar" />
+        <Avatar className="h-8 w-8 border border-primary/40 shadow-[0_0_8px_oklch(0.65_0.26_300/0.3)]">
+          <AvatarImage
+            src="/assets/generated/avatar-placeholder-new.dim_128x128.png"
+            alt="User avatar"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = '/assets/generated/default-avatar.dim_128x128.png';
+            }}
+          />
           <AvatarFallback className="bg-primary/20 text-primary text-xs font-semibold">
             {displayName ? displayName.slice(0, 2).toUpperCase() : 'U'}
           </AvatarFallback>
@@ -51,7 +57,7 @@ export default function LoginButton({ displayName, compact = false }: LoginButto
           size="sm"
           onClick={handleAuth}
           disabled={isLoggingIn}
-          className="text-muted-foreground hover:text-foreground"
+          className="text-muted-foreground hover:text-foreground rounded-full"
         >
           <LogOut className="h-4 w-4" />
         </Button>
@@ -64,7 +70,7 @@ export default function LoginButton({ displayName, compact = false }: LoginButto
       onClick={handleAuth}
       disabled={isLoggingIn}
       size="sm"
-      className="btn-teal gap-2"
+      className="btn-violet gap-2 rounded-full px-4"
     >
       {isLoggingIn ? (
         <Loader2 className="h-4 w-4 animate-spin" />

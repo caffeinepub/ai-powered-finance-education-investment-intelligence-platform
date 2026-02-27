@@ -1,6 +1,145 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "All core modules already implemented — confirm existing feature coverage",
-  "requirements": []
+  "title": "Apply unique, distinctive visual design across the platform",
+  "requirements": [
+    {
+      "id": "REQ-33",
+      "summary": "Redesign global CSS design system with a distinctive new color palette (deep indigo-black base with neon violet and electric lime accents) defined as OKLCH custom properties, updating typography scale, spacing rhythm, and border-radius tokens",
+      "acceptanceCriteria": [
+        "The platform's base background, primary accent, and secondary accent colors are visibly distinct from the previous teal/gold-on-dark-charcoal scheme.",
+        "CSS custom properties in `frontend/src/index.css` are fully remapped to the new palette.",
+        "`frontend/tailwind.config.js` color tokens match the new palette.",
+        "No hardcoded old teal/gold hex or oklch values remain in the global stylesheet.",
+        "All pages render without broken color references or unstyled elements."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Replace all existing OKLCH CSS custom properties (--background, --foreground, --primary, --accent, --chart-1 through --chart-5, etc.) with the new distinctive color palette. Use deep indigo-black (oklch(0.18 0.02 270)) as the base background, neon violet (oklch(0.65 0.25 300)) as primary accent, and electric lime (oklch(0.85 0.20 130)) as secondary accent. Remap all chart colors to the new palette. Update typography scale variables (--font-size-*, --line-height-*), spacing rhythm tokens (--space-*), and border-radius tokens (--radius-*) to create a premium editorial feel. Preserve all utility classes (.glass-card, .glass-nav, etc.) but update their color references to use the new custom properties."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Update the theme.extend.colors object to reference the new CSS custom properties defined in index.css. Ensure all color tokens (background, foreground, primary, accent, chart colors) map to the updated OKLCH values. Update border-radius, box-shadow, and animation definitions to align with the new premium design system. Verify that all Tailwind utility classes will generate correctly with the new color scheme."
+        }
+      ]
+    },
+    {
+      "id": "REQ-34",
+      "summary": "Redesign GlassCard component with distinctive glassmorphism treatment including layered frosted-glass panels, gradient borders, and a new 'aurora' variant with animated gradient shimmer",
+      "acceptanceCriteria": [
+        "`GlassCard` renders with the new layered frosted-glass visual treatment.",
+        "The `variant='aurora'` prop triggers a visible animated gradient border shimmer.",
+        "Existing usages of `GlassCard` without the new prop continue to render without errors.",
+        "The card style is visually distinct from the previous version."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/GlassCard.tsx",
+          "operation": "modify",
+          "description": "Redesign the GlassCard component styling to use the new color palette custom properties. Replace standard backdrop-blur with layered frosted-glass treatment featuring a subtle gradient border (use pseudo-element ::before or box-shadow with inner highlight on top edge and colored glow on bottom edge). Add a new 'aurora' variant option to the existing variant prop type. When variant='aurora', apply a CSS keyframe animation (@keyframes aurora-shimmer) that creates an animated gradient border shimmer effect using the new violet-to-lime gradient. Ensure the component remains backward-compatible with existing usage (default and glow variants). Update className logic to conditionally apply aurora styling while preserving hover effects and existing variants."
+        }
+      ]
+    },
+    {
+      "id": "REQ-35",
+      "summary": "Overhaul TopNav component with frosted-glass aesthetic, animated logo mark, pill-shaped tabs with sliding active indicator, and new signature accent colors for active/hover states",
+      "acceptanceCriteria": [
+        "TopNav displays pill-shaped nav tabs with an animated sliding active indicator.",
+        "Active and hover states use the new signature accent colors.",
+        "The nav remains sticky and collapses to a hamburger menu on mobile viewports.",
+        "Logo mark is visible on the left side of the nav."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TopNav.tsx",
+          "operation": "modify",
+          "description": "Redesign TopNav with frosted-glass nav strip styling using the new color palette. Replace the current logo with the new generated logo mark (frontend/public/assets/generated/logo-mark-new.dim_128x128.png). Restyle nav links as pill-shaped tabs with rounded backgrounds. Implement a sliding active indicator (position: absolute animated element) that transitions smoothly between active tabs using CSS transform or left/width transitions. Apply the new neon violet accent color for active state and electric lime for hover state. Ensure the nav remains sticky (position: sticky) and fully responsive with hamburger menu on mobile. Update the utility icons cluster (bell, profile) with distinct spacing aligned to the new design system."
+        }
+      ]
+    },
+    {
+      "id": "REQ-36",
+      "summary": "Redesign HomePage hero section with animated abstract data-visualization motif, gradient text clip headline, and feature cards with aurora variant and 3D tilt micro-interactions",
+      "acceptanceCriteria": [
+        "The hero section renders an animated SVG or CSS-based abstract motif instead of a static image.",
+        "The headline text has a visible gradient clip effect using the new accent colors.",
+        "Feature cards use the `GlassCard` aurora variant and exhibit a 3D tilt micro-interaction on hover.",
+        "The overall hero layout is visually distinct from the previous version."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Redesign the hero section to replace the current hero banner image with the new generated hero banner (frontend/public/assets/generated/hero-banner-new.dim_1440x600.png) or an inline animated SVG/CSS abstract data-visualization motif (e.g., flowing particle lines or animated candlestick silhouettes rendered with SVG elements or CSS keyframe animations). Apply a large editorial headline with gradient text clip effect (background: linear-gradient using new violet-to-lime palette, -webkit-background-clip: text, color: transparent). Update the feature cards grid below the hero to use GlassCard with variant='aurora'. Add 3D tilt micro-interaction on hover using CSS perspective and rotateX/Y transforms (transform: perspective(1000px) rotateX(2deg) rotateY(2deg) on hover). Ensure layout remains responsive."
+        }
+      ]
+    },
+    {
+      "id": "REQ-37",
+      "summary": "Define and apply consistent micro-interaction and motion design tokens across the platform: fade-slide-up for cards, glow-pulse for CTA buttons, and number-tick animation for KPI displays",
+      "acceptanceCriteria": [
+        "All GlassCard instances animate in with a fade-slide-up effect on first render.",
+        "Primary action buttons exhibit a glow-pulse animation using the new accent color.",
+        "Numeric KPI values on ProfilePage, PortfolioAnalyzerPage, and StockPlaygroundPage display a counting/tick animation when their value changes.",
+        "Animations are smooth and do not cause layout shifts."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Define three new CSS keyframe animations in the global stylesheet: (1) @keyframes anim-enter for fade-slide-up effect (opacity 0→1, transform translateY(20px)→0), (2) @keyframes anim-pulse-accent for glow-pulse using the new neon violet accent color (box-shadow pulse from 0 to large blur with accent color), and (3) @keyframes anim-number-tick for numeric counter animation (transform scale(1.1)→1 with subtle color flash). Add corresponding CSS custom property references (--anim-enter, --anim-pulse-accent, --anim-number-tick) and utility classes (.animate-enter, .animate-pulse-accent, .animate-number-tick) for easy application across components."
+        },
+        {
+          "path": "frontend/src/components/GlassCard.tsx",
+          "operation": "modify",
+          "description": "Apply the --anim-enter animation to all GlassCard instances on mount. Add the .animate-enter class or inline style with animation: anim-enter 0.6s ease-out to the root div element. Ensure the animation runs once on first render without causing layout shifts."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "modify",
+          "description": "Apply the --anim-number-tick animation to all numeric KPI displays (learning progress percentage, prediction accuracy, portfolio value). Wrap numeric values in a span with the .animate-number-tick class and trigger the animation when values change using a React key or useEffect dependency. Add the .animate-pulse-accent class to any primary action buttons (e.g., Edit Profile, Set Password) to apply the glow-pulse effect."
+        },
+        {
+          "path": "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+          "operation": "modify",
+          "description": "Apply the --anim-number-tick animation to numeric portfolio KPI displays (total value, gain/loss percentages, risk score). Wrap numeric values in spans with the .animate-number-tick class and trigger animation on value changes. Apply .animate-pulse-accent to primary action buttons (e.g., Add Holding, Save Portfolio)."
+        },
+        {
+          "path": "frontend/src/pages/StockPlaygroundPage.tsx",
+          "operation": "modify",
+          "description": "Apply the --anim-number-tick animation to prediction accuracy statistics and numeric counters. Wrap numeric displays in spans with the .animate-number-tick class and trigger animation on updates. Apply .animate-pulse-accent to primary action buttons (e.g., Submit Prediction)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-38",
+      "summary": "Wire new generated logo mark, hero banner, and default avatar assets into the platform UI to match the new visual identity",
+      "acceptanceCriteria": [
+        "New logo mark asset is placed in `frontend/public/assets/generated/` and rendered in TopNav.",
+        "New hero banner asset is placed in `frontend/public/assets/generated/` and used on HomePage.",
+        "New default avatar placeholder is placed in `frontend/public/assets/generated/` and used as fallback avatar.",
+        "All three assets visually align with the new signature color palette."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/TopNav.tsx",
+          "operation": "modify",
+          "description": "Update the logo img src to use the new generated logo mark at frontend/public/assets/generated/logo-mark-new.dim_128x128.png. Ensure the logo is visible on the left side of the nav and sized appropriately (e.g., h-8 or h-10). Verify the logo mark visually aligns with the new violet/lime color palette."
+        },
+        {
+          "path": "frontend/src/pages/HomePage.tsx",
+          "operation": "modify",
+          "description": "Update the hero section background or image element to use the new generated hero banner at frontend/public/assets/generated/hero-banner-new.dim_1440x600.png. If using as a background image, apply it to the hero container div with appropriate background-size and background-position. If using as an img element, ensure it spans the full hero width with object-fit: cover. Verify the banner visually aligns with the new deep indigo-black and aurora gradient palette."
+        },
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "modify",
+          "description": "Update the default avatar fallback image to use the new generated avatar placeholder at frontend/public/assets/generated/avatar-placeholder-new.dim_128x128.png. Replace any existing default-avatar.dim_128x128.png references with the new avatar-placeholder-new.dim_128x128.png. Ensure the avatar is displayed when no user profile image is available and visually aligns with the new color palette."
+        }
+      ]
+    }
+  ]
 }

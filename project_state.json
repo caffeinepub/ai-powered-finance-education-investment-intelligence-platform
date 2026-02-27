@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 21,
+  "projectStateVersion": 23,
   "summary": "AI-Powered Finance Education & Investment Intelligence Platform — a full-stack web app integrating financial learning, stock prediction playground, news intelligence, portfolio analysis, and an AI chatbot advisor into a unified ecosystem.",
   "architectural_notes": [
     "Separate frontend and backend clearly; use a modern stack (e.g., React + Node/FastAPI)",
@@ -10,6 +10,7 @@
   ],
   "known_issues": [],
   "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Abstract geometric logo mark icon evoking neural network or data flow nodes, rendered in vivid violet and electric lime on a near-black background, with glowing node dots and connecting lines (logo-mark-new.dim_128x128.png)\n- Wide dark hero banner with abstract flowing data-stream or particle field motif in deep indigo-black with aurora violet-to-lime gradient highlights, cinematic depth and subtle bokeh (hero-banner-new.dim_1440x600.png)\n- Minimalist default user avatar placeholder with an abstract faceless silhouette rendered in the new violet/lime accent palette on a dark frosted-glass circle background (avatar-placeholder-new.dim_128x128.png)",
   "existing_features": [
     {
       "id": "feature-implement-internet-identity-based-user-authentication-with-persistent-user-profiles-stored-on-chain-each-profile-must-track-display-name-learning-progress-completed-lessons-assessment-scores-stock-prediction-history-predictions-made-outcomes-accuracy-rate-and-portfolio-data-references",
@@ -218,6 +219,54 @@
         "REQ-30"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-redesign-the-global-css-design-system-in-frontend-src-index-css-and-frontend-tailwind-config-js-to-introduce-a-truly-distinctive-visual-identity-that-departs-from-the-current-standard-dark-finance-teal-gold-palette-adopt-a-new-signature-color-scheme-for-example-a-deep-indigo-black-base-with-neon-violet-and-electric-lime-accents-or-a-slate-obsidian-base-with-aurora-gradient-accents-cyan-to-magenta-defined-as-oklch-custom-properties-redefine-typography-scale-spacing-rhythm-and-border-radius-tokens-to-feel-editorial-and-premium-rather-than-generic-all-existing-color-token-references-primary-accent-chart-colors-etc-must-be-remapped-to-the-new-palette-so-every-component-inherits-the-change-automatically-without-file-by-file-edits",
+      "title": "Redesign the global CSS design system in `frontend/src/index.css` and `frontend/tailwind.config.js` to introduce a truly distinctive visual identity that departs from the current standard dark-finance teal/gold palette. Adopt a new signature color scheme — for example a deep indigo-black base with neon violet and electric lime accents, or a slate-obsidian base with aurora-gradient accents (cyan-to-magenta) — defined as OKLCH custom properties. Redefine typography scale, spacing rhythm, and border-radius tokens to feel editorial and premium rather than generic. All existing color token references (--primary, --accent, chart colors, etc.) must be remapped to the new palette so every component inherits the change automatically without file-by-file edits.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-redesign-the-glasscard-component-frontend-src-components-glasscard-tsx-to-use-a-distinctive-glassmorphism-treatment-aligned-with-the-new-color-palette-replace-standard-backdrop-blur-cards-with-layered-frosted-glass-panels-that-include-a-subtle-gradient-border-rendered-via-a-pseudo-element-or-box-shadow-stack-e-g-inner-highlight-on-top-edge-colored-glow-on-bottom-add-a-new-variant-prop-value-aurora-that-applies-an-animated-gradient-shimmer-along-the-card-border-using-a-css-keyframe-giving-premium-interactive-cards-a-living-iridescent-feel",
+      "title": "Redesign the `GlassCard` component (`frontend/src/components/GlassCard.tsx`) to use a distinctive glassmorphism treatment aligned with the new color palette: replace standard backdrop-blur cards with layered frosted-glass panels that include a subtle gradient border rendered via a pseudo-element or box-shadow stack (e.g., inner highlight on top edge, colored glow on bottom). Add a new `variant` prop value `'aurora'` that applies an animated gradient shimmer along the card border using a CSS keyframe, giving premium interactive cards a living, iridescent feel.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-overhaul-the-topnav-component-frontend-src-components-topnav-tsx-with-a-unique-navigation-aesthetic-replace-the-current-flat-minimal-bar-with-a-frosted-glass-nav-strip-that-features-a-left-side-animated-logo-mark-nav-links-styled-as-pill-shaped-tabs-with-an-active-indicator-that-slides-between-them-using-a-css-transition-and-a-right-side-cluster-of-utility-icons-bell-profile-arranged-with-distinct-spacing-apply-the-new-signature-accent-colors-for-active-and-hover-states-the-nav-must-remain-sticky-and-fully-responsive-with-a-hamburger-menu-on-mobile",
+      "title": "Overhaul the `TopNav` component (`frontend/src/components/TopNav.tsx`) with a unique navigation aesthetic: replace the current flat/minimal bar with a frosted-glass nav strip that features a left-side animated logo mark, nav links styled as pill-shaped tabs with an active indicator that slides between them using a CSS transition, and a right-side cluster of utility icons (bell, profile) arranged with distinct spacing. Apply the new signature accent colors for active and hover states. The nav must remain sticky and fully responsive with a hamburger menu on mobile.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-redesign-the-homepage-frontend-src-pages-homepage-tsx-hero-section-with-a-visually-striking-layout-replace-the-current-hero-banner-image-with-an-animated-svg-or-css-based-abstract-data-visualization-motif-e-g-flowing-particle-lines-or-animated-candlestick-silhouettes-rendered-directly-in-the-dom-using-inline-svg-or-a-css-keyframe-animation-apply-a-large-editorial-headline-with-a-gradient-text-clip-effect-using-the-new-accent-colors-module-feature-cards-in-the-grid-below-the-hero-must-use-the-updated-glasscard-aurora-variant-and-include-distinct-micro-interaction-hover-states-e-g-card-tilt-via-perspective-rotatex-y-on-hover",
+      "title": "Redesign the `HomePage` (`frontend/src/pages/HomePage.tsx`) hero section with a visually striking layout: replace the current hero banner image with an animated SVG or CSS-based abstract data-visualization motif (e.g., flowing particle lines or animated candlestick silhouettes) rendered directly in the DOM using inline SVG or a CSS keyframe animation. Apply a large editorial headline with a gradient text clip effect using the new accent colors. Module feature cards in the grid below the hero must use the updated `GlassCard` aurora variant and include distinct micro-interaction hover states (e.g., card tilt via `perspective` + `rotateX/Y` on hover).",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-consistent-set-of-unique-micro-interaction-and-motion-design-tokens-across-all-interactive-elements-platform-wide-define-css-keyframe-animations-for-1-a-anim-enter-fade-slide-up-for-page-sections-and-cards-on-mount-2-a-anim-pulse-accent-glow-pulse-for-cta-buttons-using-the-new-accent-color-and-3-a-anim-number-tick-counter-animation-for-stat-metric-displays-learning-progress-portfolio-value-prediction-accuracy-apply-anim-enter-to-all-glasscard-instances-apply-the-glow-pulse-to-all-primary-action-buttons-and-apply-the-number-tick-to-all-numeric-kpi-values-displayed-on-the-profile-portfolio-and-prediction-pages",
+      "title": "Apply a consistent set of unique micro-interaction and motion design tokens across all interactive elements platform-wide. Define CSS keyframe animations for: (1) a `--anim-enter` fade-slide-up for page sections and cards on mount, (2) a `--anim-pulse-accent` glow pulse for CTA buttons using the new accent color, and (3) a `--anim-number-tick` counter animation for stat/metric displays (learning progress %, portfolio value, prediction accuracy). Apply `--anim-enter` to all `GlassCard` instances, apply the glow pulse to all primary action buttons, and apply the number tick to all numeric KPI values displayed on the Profile, Portfolio, and Prediction pages.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-a-new-platform-logo-mark-and-hero-banner-that-match-the-new-unique-visual-identity-non-teal-gold-the-logo-mark-should-be-an-abstract-geometric-icon-evoking-neural-networks-or-data-flows-with-the-new-accent-color-palette-the-hero-banner-should-be-a-wide-dark-background-abstract-composition-using-the-new-signature-colors-with-subtle-depth-and-motion-cues-also-generate-a-new-default-avatar-placeholder-image-consistent-with-the-new-palette",
+      "title": "Generate a new platform logo mark and hero banner that match the new unique visual identity (non-teal/gold). The logo mark should be an abstract geometric icon evoking neural networks or data flows with the new accent color palette. The hero banner should be a wide dark-background abstract composition using the new signature colors with subtle depth and motion cues. Also generate a new default avatar placeholder image consistent with the new palette.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -357,6 +406,12 @@
       "reqIds": [
         "REQ-32"
       ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Apply a unique, distinctive visual design across the platform — differentiated from standard dark finance themes, with custom UI patterns, iconography, layouts, or color treatments that make the platform stand out",
+      "reqIds": [],
       "status": "pending"
     }
   ],

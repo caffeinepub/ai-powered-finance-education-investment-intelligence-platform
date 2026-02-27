@@ -1,26 +1,112 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-27T01:10:34.203Z",
+  "generatedAt": "2026-02-27T01:40:40.701Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 0,
-    "implemented": 0,
-    "items": []
+    "total": 6,
+    "implemented": 6,
+    "items": [
+      {
+        "id": "REQ-33",
+        "summary": "Redesign the global CSS design system in `frontend/src/index.css` and `frontend/tailwind.config.js` to introduce a truly distinctive visual identity that departs from the current standard dark-finance teal/gold palette. Adopt a new signature color scheme — for example a deep indigo-black base with neon violet and electric lime accents, or a slate-obsidian base with aurora-gradient accents (cyan-to-magenta) — defined as OKLCH custom properties. Redefine typography scale, spacing rhythm, and border-radius tokens to feel editorial and premium rather than generic. All existing color token references (--primary, --accent, chart colors, etc.) must be remapped to the new palette so every component inherits the change automatically without file-by-file edits.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/tailwind.config.js"
+        ]
+      },
+      {
+        "id": "REQ-34",
+        "summary": "Redesign the `GlassCard` component (`frontend/src/components/GlassCard.tsx`) to use a distinctive glassmorphism treatment aligned with the new color palette: replace standard backdrop-blur cards with layered frosted-glass panels that include a subtle gradient border rendered via a pseudo-element or box-shadow stack (e.g., inner highlight on top edge, colored glow on bottom). Add a new `variant` prop value `'aurora'` that applies an animated gradient shimmer along the card border using a CSS keyframe, giving premium interactive cards a living, iridescent feel.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/GlassCard.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/GlassCard.tsx"
+        ]
+      },
+      {
+        "id": "REQ-35",
+        "summary": "Overhaul the `TopNav` component (`frontend/src/components/TopNav.tsx`) with a unique navigation aesthetic: replace the current flat/minimal bar with a frosted-glass nav strip that features a left-side animated logo mark, nav links styled as pill-shaped tabs with an active indicator that slides between them using a CSS transition, and a right-side cluster of utility icons (bell, profile) arranged with distinct spacing. Apply the new signature accent colors for active and hover states. The nav must remain sticky and fully responsive with a hamburger menu on mobile.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/TopNav.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/TopNav.tsx"
+        ]
+      },
+      {
+        "id": "REQ-36",
+        "summary": "Redesign the `HomePage` (`frontend/src/pages/HomePage.tsx`) hero section with a visually striking layout: replace the current hero banner image with an animated SVG or CSS-based abstract data-visualization motif (e.g., flowing particle lines or animated candlestick silhouettes) rendered directly in the DOM using inline SVG or a CSS keyframe animation. Apply a large editorial headline with a gradient text clip effect using the new accent colors. Module feature cards in the grid below the hero must use the updated `GlassCard` aurora variant and include distinct micro-interaction hover states (e.g., card tilt via `perspective` + `rotateX/Y` on hover).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/HomePage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/HomePage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-37",
+        "summary": "Apply a consistent set of unique micro-interaction and motion design tokens across all interactive elements platform-wide. Define CSS keyframe animations for: (1) a `--anim-enter` fade-slide-up for page sections and cards on mount, (2) a `--anim-pulse-accent` glow pulse for CTA buttons using the new accent color, and (3) a `--anim-number-tick` counter animation for stat/metric displays (learning progress %, portfolio value, prediction accuracy). Apply `--anim-enter` to all `GlassCard` instances, apply the glow pulse to all primary action buttons, and apply the number tick to all numeric KPI values displayed on the Profile, Portfolio, and Prediction pages.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/components/GlassCard.tsx",
+          "frontend/src/pages/ProfilePage.tsx",
+          "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+          "frontend/src/pages/StockPlaygroundPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/index.css",
+          "frontend/src/components/GlassCard.tsx",
+          "frontend/src/pages/ProfilePage.tsx",
+          "frontend/src/pages/PortfolioAnalyzerPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-38",
+        "summary": "Generate a new platform logo mark and hero banner that match the new unique visual identity (non-teal/gold). The logo mark should be an abstract geometric icon evoking neural networks or data flows with the new accent color palette. The hero banner should be a wide dark-background abstract composition using the new signature colors with subtle depth and motion cues. Also generate a new default avatar placeholder image consistent with the new palette.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/components/TopNav.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/LoginButton.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/components/TopNav.tsx",
+          "frontend/src/pages/HomePage.tsx",
+          "frontend/src/components/LoginButton.tsx"
+        ]
+      }
+    ]
   },
   "changedFiles": [
-    "backend/main.mo",
     "build-request.json",
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/AdvisorPage.tsx",
-    "frontend/src/pages/NewsModulePage.tsx",
+    "frontend/public/assets/generated/avatar-placeholder-new.dim_128x128.png",
+    "frontend/public/assets/generated/hero-banner-new.dim_1440x600.png",
+    "frontend/public/assets/generated/logo-mark-new.dim_128x128.png",
+    "frontend/src/components/GlassCard.tsx",
+    "frontend/src/components/LoginButton.tsx",
+    "frontend/src/components/TopNav.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/HomePage.tsx",
     "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+    "frontend/src/pages/ProfilePage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

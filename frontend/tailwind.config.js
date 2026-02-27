@@ -16,8 +16,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['DM Sans', 'system-ui', 'sans-serif'],
+        display: ['Syne', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: 'oklch(var(--border) / <alpha-value>)',
@@ -25,13 +25,26 @@ export default {
         ring: 'oklch(var(--ring) / <alpha-value>)',
         background: 'oklch(var(--background))',
         foreground: 'oklch(var(--foreground))',
+        violet: {
+          DEFAULT: 'oklch(var(--violet))',
+          muted: 'oklch(var(--violet) / 0.15)',
+        },
+        lime: {
+          DEFAULT: 'oklch(var(--lime))',
+          muted: 'oklch(var(--lime) / 0.15)',
+        },
+        cyan: {
+          DEFAULT: 'oklch(var(--cyan))',
+          muted: 'oklch(var(--cyan) / 0.15)',
+        },
+        /* Legacy aliases */
         teal: {
-          DEFAULT: 'oklch(var(--teal))',
-          muted: 'oklch(var(--teal) / 0.15)',
+          DEFAULT: 'oklch(var(--violet))',
+          muted: 'oklch(var(--violet) / 0.15)',
         },
         gold: {
-          DEFAULT: 'oklch(var(--gold))',
-          muted: 'oklch(var(--gold) / 0.15)',
+          DEFAULT: 'oklch(var(--lime))',
+          muted: 'oklch(var(--lime) / 0.15)',
         },
         primary: {
           DEFAULT: 'oklch(var(--primary) / <alpha-value>)',
@@ -84,13 +97,17 @@ export default {
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
         xl: 'calc(var(--radius) + 4px)',
-        '2xl': 'calc(var(--radius) + 8px)',
+        '2xl': 'calc(var(--radius) + 12px)',
+        '3xl': 'calc(var(--radius) + 20px)',
       },
       boxShadow: {
         xs: '0 1px 2px 0 rgba(0,0,0,0.05)',
-        glass: '0 8px 32px rgba(0,0,0,0.3)',
-        teal: '0 0 20px oklch(0.72 0.18 185 / 0.3)',
-        gold: '0 0 20px oklch(0.78 0.16 75 / 0.3)',
+        glass: '0 8px 32px rgba(0,0,0,0.4)',
+        violet: '0 0 24px oklch(0.65 0.26 300 / 0.4)',
+        lime: '0 0 24px oklch(0.84 0.22 130 / 0.4)',
+        /* Legacy */
+        teal: '0 0 24px oklch(0.65 0.26 300 / 0.4)',
+        gold: '0 0 24px oklch(0.84 0.22 130 / 0.4)',
       },
       keyframes: {
         'accordion-down': {

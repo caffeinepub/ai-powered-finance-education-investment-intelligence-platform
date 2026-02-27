@@ -1,4 +1,125 @@
 {
   "kind": "feature_evidence_report",
-  "features": []
+  "features": [
+    {
+      "featureId": "feature-redesign-the-global-css-design-system-in-frontend-src-index-css-and-frontend-tailwind-config-js-to-introduce-a-truly-distinctive-visual-identity-that-departs-from-the-current-standard-dark-finance-teal-gold-palette-adopt-a-new-signature-color-scheme-for-example-a-deep-indigo-black-base-with-neon-violet-and-electric-lime-accents-or-a-slate-obsidian-base-with-aurora-gradient-accents-cyan-to-magenta-defined-as-oklch-custom-properties-redefine-typography-scale-spacing-rhythm-and-border-radius-tokens-to-feel-editorial-and-premium-rather-than-generic-all-existing-color-token-references-primary-accent-chart-colors-etc-must-be-remapped-to-the-new-palette-so-every-component-inherits-the-change-automatically-without-file-by-file-edits",
+      "featureTitle": "Redesign the global CSS design system in `frontend/src/index.css` and `frontend/tailwind.config.js` to introduce a truly distinctive visual identity that departs from the current standard dark-finance teal/gold palette. Adopt a new signature color scheme — for example a deep indigo-black base with neon violet and electric lime accents, or a slate-obsidian base with aurora-gradient accents (cyan-to-magenta) — defined as OKLCH custom properties. Redefine typography scale, spacing rhythm, and border-radius tokens to feel editorial and premium rather than generic. All existing color token references (--primary, --accent, chart colors, etc.) must be remapped to the new palette so every component inherits the change automatically without file-by-file edits.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-33"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-redesign-the-glasscard-component-frontend-src-components-glasscard-tsx-to-use-a-distinctive-glassmorphism-treatment-aligned-with-the-new-color-palette-replace-standard-backdrop-blur-cards-with-layered-frosted-glass-panels-that-include-a-subtle-gradient-border-rendered-via-a-pseudo-element-or-box-shadow-stack-e-g-inner-highlight-on-top-edge-colored-glow-on-bottom-add-a-new-variant-prop-value-aurora-that-applies-an-animated-gradient-shimmer-along-the-card-border-using-a-css-keyframe-giving-premium-interactive-cards-a-living-iridescent-feel",
+      "featureTitle": "Redesign the `GlassCard` component (`frontend/src/components/GlassCard.tsx`) to use a distinctive glassmorphism treatment aligned with the new color palette: replace standard backdrop-blur cards with layered frosted-glass panels that include a subtle gradient border rendered via a pseudo-element or box-shadow stack (e.g., inner highlight on top edge, colored glow on bottom). Add a new `variant` prop value `'aurora'` that applies an animated gradient shimmer along the card border using a CSS keyframe, giving premium interactive cards a living, iridescent feel.",
+      "files": [
+        "frontend/src/components/GlassCard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-34"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-overhaul-the-topnav-component-frontend-src-components-topnav-tsx-with-a-unique-navigation-aesthetic-replace-the-current-flat-minimal-bar-with-a-frosted-glass-nav-strip-that-features-a-left-side-animated-logo-mark-nav-links-styled-as-pill-shaped-tabs-with-an-active-indicator-that-slides-between-them-using-a-css-transition-and-a-right-side-cluster-of-utility-icons-bell-profile-arranged-with-distinct-spacing-apply-the-new-signature-accent-colors-for-active-and-hover-states-the-nav-must-remain-sticky-and-fully-responsive-with-a-hamburger-menu-on-mobile",
+      "featureTitle": "Overhaul the `TopNav` component (`frontend/src/components/TopNav.tsx`) with a unique navigation aesthetic: replace the current flat/minimal bar with a frosted-glass nav strip that features a left-side animated logo mark, nav links styled as pill-shaped tabs with an active indicator that slides between them using a CSS transition, and a right-side cluster of utility icons (bell, profile) arranged with distinct spacing. Apply the new signature accent colors for active and hover states. The nav must remain sticky and fully responsive with a hamburger menu on mobile.",
+      "files": [
+        "frontend/src/components/TopNav.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-35"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-redesign-the-homepage-frontend-src-pages-homepage-tsx-hero-section-with-a-visually-striking-layout-replace-the-current-hero-banner-image-with-an-animated-svg-or-css-based-abstract-data-visualization-motif-e-g-flowing-particle-lines-or-animated-candlestick-silhouettes-rendered-directly-in-the-dom-using-inline-svg-or-a-css-keyframe-animation-apply-a-large-editorial-headline-with-a-gradient-text-clip-effect-using-the-new-accent-colors-module-feature-cards-in-the-grid-below-the-hero-must-use-the-updated-glasscard-aurora-variant-and-include-distinct-micro-interaction-hover-states-e-g-card-tilt-via-perspective-rotatex-y-on-hover",
+      "featureTitle": "Redesign the `HomePage` (`frontend/src/pages/HomePage.tsx`) hero section with a visually striking layout: replace the current hero banner image with an animated SVG or CSS-based abstract data-visualization motif (e.g., flowing particle lines or animated candlestick silhouettes) rendered directly in the DOM using inline SVG or a CSS keyframe animation. Apply a large editorial headline with a gradient text clip effect using the new accent colors. Module feature cards in the grid below the hero must use the updated `GlassCard` aurora variant and include distinct micro-interaction hover states (e.g., card tilt via `perspective` + `rotateX/Y` on hover).",
+      "files": [
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-36"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-consistent-set-of-unique-micro-interaction-and-motion-design-tokens-across-all-interactive-elements-platform-wide-define-css-keyframe-animations-for-1-a-anim-enter-fade-slide-up-for-page-sections-and-cards-on-mount-2-a-anim-pulse-accent-glow-pulse-for-cta-buttons-using-the-new-accent-color-and-3-a-anim-number-tick-counter-animation-for-stat-metric-displays-learning-progress-portfolio-value-prediction-accuracy-apply-anim-enter-to-all-glasscard-instances-apply-the-glow-pulse-to-all-primary-action-buttons-and-apply-the-number-tick-to-all-numeric-kpi-values-displayed-on-the-profile-portfolio-and-prediction-pages",
+      "featureTitle": "Apply a consistent set of unique micro-interaction and motion design tokens across all interactive elements platform-wide. Define CSS keyframe animations for: (1) a `--anim-enter` fade-slide-up for page sections and cards on mount, (2) a `--anim-pulse-accent` glow pulse for CTA buttons using the new accent color, and (3) a `--anim-number-tick` counter animation for stat/metric displays (learning progress %, portfolio value, prediction accuracy). Apply `--anim-enter` to all `GlassCard` instances, apply the glow pulse to all primary action buttons, and apply the number tick to all numeric KPI values displayed on the Profile, Portfolio, and Prediction pages.",
+      "files": [
+        "frontend/src/components/GlassCard.tsx",
+        "frontend/src/index.css",
+        "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-37"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-generate-a-new-platform-logo-mark-and-hero-banner-that-match-the-new-unique-visual-identity-non-teal-gold-the-logo-mark-should-be-an-abstract-geometric-icon-evoking-neural-networks-or-data-flows-with-the-new-accent-color-palette-the-hero-banner-should-be-a-wide-dark-background-abstract-composition-using-the-new-signature-colors-with-subtle-depth-and-motion-cues-also-generate-a-new-default-avatar-placeholder-image-consistent-with-the-new-palette",
+      "featureTitle": "Generate a new platform logo mark and hero banner that match the new unique visual identity (non-teal/gold). The logo mark should be an abstract geometric icon evoking neural networks or data flows with the new accent color palette. The hero banner should be a wide dark-background abstract composition using the new signature colors with subtle depth and motion cues. Also generate a new default avatar placeholder image consistent with the new palette.",
+      "files": [
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/components/TopNav.tsx",
+        "frontend/src/pages/HomePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-38"
+      ],
+      "confidence": "high"
+    }
+  ]
 }

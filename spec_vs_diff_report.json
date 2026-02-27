@@ -1,67 +1,49 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-27T01:10:34.199Z",
-  "summary": "The build request explicitly states that all core modules are already fully implemented and that no new requirements are needed. The diff shows various file modifications and one new file (AdvisorPage.tsx), but since there are zero requirements to verify against, there are no missing requirements. However, several new features appear in the diff that go beyond merely confirming existing coverage, including a new API Reference Page, password setup/biometric auth UI, and a getSummaryStatistics hook — none of which were requested even implicitly.",
-  "missing_requirements": [],
-  "hallucinated_features": [
+  "generatedAt": "2026-02-27T01:40:40.695Z",
+  "summary": "The diff implements most of the visual redesign requirements (REQ-33 through REQ-37) reasonably well, including the new color palette in index.css and tailwind.config.js, GlassCard aurora variant, TopNav overhaul, HomePage animated SVG hero, and micro-interaction animations. However, REQ-38 (new image assets placed in frontend/public/assets/generated/) shows no evidence of actual image files being added — the diff shows no added files and only references image paths in code. Additionally, the --anim-number-tick animation applied to KPI values on StockPlaygroundPage is not evidenced in the diff for that page specifically.",
+  "missing_requirements": [
     {
-      "description": "New ApiReferencePage added with interactive 'Run Query' buttons, collapsible return schemas, live JSON response display for four public backend endpoints",
-      "reason": "No requirement in the build request asks for an API reference page. The build request states no new requirements are needed and lists only confirmation of existing features.",
+      "id": "REQ-38",
+      "requirement": "Generate and place new logo mark (logo-mark-new.dim_128x128.png), hero banner (hero-banner-new.dim_1440x600.png), and avatar placeholder (avatar-placeholder-new.dim_128x128.png) assets in frontend/public/assets/generated/.",
+      "reason": "The diff summary shows 'Added: 0' files and 'ADDED FILES: none'. No image assets were added to frontend/public/assets/generated/. The code references these paths in TopNav.tsx, ProfilePage.tsx, and LoginButton.tsx but the actual image files are not present in the diff.",
       "evidence": [
-        "frontend/src/pages/ApiReferencePage.tsx",
-        "frontend/src/App.tsx",
-        "frontend-file-summaries.txt"
+        "frontend/src/components/TopNav.tsx",
+        "frontend/src/pages/ProfilePage.tsx",
+        "frontend/src/components/LoginButton.tsx"
       ]
     },
     {
-      "description": "New PasswordSetupModal component with SHA-256 hashing, strength indicator, and success confirmation screen",
-      "reason": "Not mentioned in any requirement. The build request explicitly prohibits re-implementing or adding modules beyond the four listed core features.",
-      "evidence": [
-        "frontend/src/components/PasswordSetupModal.tsx",
-        "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "BiometricAuthButton component using WebAuthn for biometric authentication",
-      "reason": "Not requested in the build request. Biometric authentication is a new feature not listed among the confirmed existing features.",
-      "evidence": [
-        "frontend/src/components/BiometricAuthButton.tsx",
-        "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "New Security and Authentication section on ProfilePage with password setup button and BiometricAuthButton",
-      "reason": "Not part of any stated requirement or existing confirmed feature. This is a newly introduced UI section.",
+      "id": "REQ-37",
+      "requirement": "Apply --anim-number-tick counter animation to numeric KPI values on StockPlaygroundPage (prediction accuracy).",
+      "reason": "The diff shows KpiValue component with animate-number-tick in ProfilePage.tsx and PortfolioAnalyzerPage.tsx, but StockPlaygroundPage is not among the modified files, so there is no evidence the number-tick animation was applied there.",
       "evidence": [
         "frontend/src/pages/ProfilePage.tsx",
-        "frontend-file-summaries.txt"
+        "frontend/src/pages/PortfolioAnalyzerPage.tsx"
       ]
-    },
+    }
+  ],
+  "hallucinated_features": [
     {
-      "description": "New useGetSummaryStatistics hook calling actor.getSummaryStatistics()",
-      "reason": "No requirement mentions a summary statistics endpoint or hook. This is a new feature not included in the confirmed existing feature list.",
+      "description": "Legacy color aliases 'teal' and 'gold' mapped to the new violet/lime values in tailwind.config.js",
+      "reason": "The build request asks to remove old teal/gold values and replace them entirely with the new palette. The diff adds explicit teal/gold alias entries pointing to the new palette colors, which was not requested.",
       "evidence": [
-        "frontend/src/hooks/useQueries.ts",
-        "frontend-file-summaries.txt"
-      ]
-    },
-    {
-      "description": "Backend password management functions setUserPassword and verifyUserPassword with UserProfileInput type separation",
-      "reason": "Password management is not listed among the four confirmed core modules the build request says are already live. This represents new backend functionality not requested.",
-      "evidence": [
-        "backend/main.mo"
+        "frontend/tailwind.config.js"
       ]
     }
   ],
   "confidence": 0.78,
   "changed_files": [
-    "backend/main.mo",
     "frontend-file-summaries.txt",
-    "frontend/src/hooks/useQueries.ts",
-    "frontend/src/pages/AdvisorPage.tsx",
-    "frontend/src/pages/NewsModulePage.tsx",
+    "frontend/src/components/GlassCard.tsx",
+    "frontend/src/components/LoginButton.tsx",
+    "frontend/src/components/TopNav.tsx",
+    "frontend/src/index.css",
+    "frontend/src/pages/HomePage.tsx",
     "frontend/src/pages/PortfolioAnalyzerPage.tsx",
+    "frontend/src/pages/ProfilePage.tsx",
+    "frontend/tailwind.config.js",
     "project_state.json"
   ]
 }

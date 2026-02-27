@@ -5,19 +5,30 @@ interface GlassCardProps {
   children: React.ReactNode;
   className?: string;
   hover?: boolean;
-  glow?: 'teal' | 'gold' | 'none';
+  glow?: 'teal' | 'gold' | 'violet' | 'lime' | 'none';
+  variant?: 'default' | 'aurora';
   onClick?: () => void;
 }
 
-export default function GlassCard({ children, className, hover = false, glow = 'none', onClick }: GlassCardProps) {
+export default function GlassCard({
+  children,
+  className,
+  hover = false,
+  glow = 'none',
+  variant = 'default',
+  onClick,
+}: GlassCardProps) {
   return (
     <div
       onClick={onClick}
       className={cn(
-        'glass-card rounded-xl p-4',
-        hover && 'transition-all duration-200 hover:border-primary/30 hover:-translate-y-0.5 cursor-pointer',
-        glow === 'teal' && 'hover:shadow-teal',
-        glow === 'gold' && 'hover:shadow-gold',
+        'rounded-2xl p-4 animate-enter',
+        variant === 'aurora' ? 'glass-card-aurora' : 'glass-card',
+        hover && 'tilt-card cursor-pointer',
+        glow === 'teal' && 'hover:shadow-violet',
+        glow === 'violet' && 'hover:shadow-violet',
+        glow === 'gold' && 'hover:shadow-lime',
+        glow === 'lime' && 'hover:shadow-lime',
         onClick && 'cursor-pointer',
         className
       )}

@@ -18,6 +18,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import GlassCard from '../components/GlassCard';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 interface HoldingFormData {
@@ -48,19 +49,26 @@ const SECTOR_MAP: Record<string, string> = {
   WMT: 'Retail', TGT: 'Retail',
 };
 
+// Updated to use new palette colors
 const SECTOR_COLORS: Record<string, string> = {
-  Technology: '#6366f1', Consumer: '#f59e0b', Automotive: '#10b981',
-  Media: '#ec4899', Finance: '#3b82f6', Healthcare: '#14b8a6',
-  Energy: '#f97316', Retail: '#8b5cf6', Other: '#6b7280',
+  Technology: '#a855f7',   // violet
+  Consumer: '#84cc16',     // lime
+  Automotive: '#22d3ee',   // cyan
+  Media: '#f472b6',        // pink
+  Finance: '#818cf8',      // indigo
+  Healthcare: '#34d399',   // emerald
+  Energy: '#fb923c',       // orange
+  Retail: '#c084fc',       // purple
+  Other: '#6b7280',
 };
 
-const PIE_COLORS = ['#10b981', '#6366f1', '#f59e0b', '#ef4444', '#ec4899', '#3b82f6', '#14b8a6', '#f97316'];
+const PIE_COLORS = ['#a855f7', '#84cc16', '#22d3ee', '#f472b6', '#818cf8', '#34d399', '#fb923c', '#c084fc'];
 
 function getRiskLevel(score: number): { label: string; color: string; description: string } {
-  if (score <= 30) return { label: 'Low', color: '#10b981', description: 'Conservative portfolio with stable assets' };
-  if (score <= 60) return { label: 'Moderate', color: '#f59e0b', description: 'Balanced mix of growth and stability' };
-  if (score <= 80) return { label: 'High', color: '#f97316', description: 'Growth-oriented with higher volatility' };
-  return { label: 'Very High', color: '#ef4444', description: 'Aggressive portfolio, significant risk exposure' };
+  if (score <= 30) return { label: 'Low', color: '#34d399', description: 'Conservative portfolio with stable assets' };
+  if (score <= 60) return { label: 'Moderate', color: '#84cc16', description: 'Balanced mix of growth and stability' };
+  if (score <= 80) return { label: 'High', color: '#fb923c', description: 'Growth-oriented with higher volatility' };
+  return { label: 'Very High', color: '#f87171', description: 'Aggressive portfolio, significant risk exposure' };
 }
 
 function formatCurrency(val: number): string {
@@ -109,7 +117,7 @@ function HoldingRow({
     <tr className="border-b border-border/10 hover:bg-white/3 transition-colors group">
       <td className="py-3 px-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center">
             <span className="text-xs font-bold text-primary">{holding.symbol.slice(0, 2)}</span>
           </div>
           <div>
@@ -158,9 +166,9 @@ function SummaryCard({ label, value, sub, icon: Icon, color, trend }: {
   trend?: 'up' | 'down' | 'neutral';
 }) {
   return (
-    <div className="glass-card rounded-xl p-5">
+    <GlassCard className="p-5">
       <div className="flex items-start justify-between mb-3">
-        <div className="p-2 rounded-lg" style={{ background: color + '22' }}>
+        <div className="p-2 rounded-xl" style={{ background: color + '22' }}>
           <Icon size={18} style={{ color }} />
         </div>
         {trend && (
@@ -171,10 +179,12 @@ function SummaryCard({ label, value, sub, icon: Icon, color, trend }: {
           </div>
         )}
       </div>
-      <p className="text-2xl font-bold text-foreground">{value}</p>
+      <p className="text-2xl font-bold text-foreground font-display">
+        <span key={value} className="animate-number-tick inline-block">{value}</span>
+      </p>
       <p className="text-xs text-muted-foreground mt-1">{label}</p>
       {sub && <p className="text-xs mt-0.5" style={{ color }}>{sub}</p>}
-    </div>
+    </GlassCard>
   );
 }
 
@@ -196,14 +206,14 @@ function RiskMetricsPanel({ holdings, riskScore }: {
   ];
 
   return (
-    <div className="glass-card rounded-xl p-5">
+    <GlassCard className="p-5">
       <div className="flex items-center gap-2 mb-5">
         <Shield size={16} className="text-primary" />
-        <h3 className="font-semibold text-foreground">Risk Analysis</h3>
+        <h3 className="font-semibold text-foreground font-display">Risk Analysis</h3>
       </div>
-      <div className="flex items-center gap-4 mb-5 p-3 rounded-lg bg-white/5">
+      <div className="flex items-center gap-4 mb-5 p-3 rounded-xl bg-white/5">
         <div className="text-center">
-          <div className="text-3xl font-bold" style={{ color: risk.color }}>{riskScore}</div>
+          <div className="text-3xl font-bold font-display" style={{ color: risk.color }}>{riskScore}</div>
           <div className="text-xs text-muted-foreground mt-0.5">Risk Score</div>
         </div>
         <div className="flex-1">
@@ -221,20 +231,20 @@ function RiskMetricsPanel({ holdings, riskScore }: {
           <PolarGrid stroke="rgba(255,255,255,0.1)" />
           <PolarAngleAxis dataKey="metric" tick={{ fontSize: 10, fill: '#9ca3af' }} />
           <PolarRadiusAxis domain={[0, 100]} tick={false} />
-          <Radar dataKey="value" stroke="#10b981" fill="#10b981" fillOpacity={0.2} />
+          <Radar dataKey="value" stroke="#a855f7" fill="#a855f7" fillOpacity={0.2} />
         </RadarChart>
       </ResponsiveContainer>
       <div className="grid grid-cols-2 gap-3 mt-3">
-        <div className="bg-white/5 rounded-lg p-3 text-center">
-          <p className="text-lg font-bold text-foreground">{holdings.length}</p>
+        <div className="bg-white/5 rounded-xl p-3 text-center">
+          <p className="text-lg font-bold text-foreground font-display">{holdings.length}</p>
           <p className="text-xs text-muted-foreground">Holdings</p>
         </div>
-        <div className="bg-white/5 rounded-lg p-3 text-center">
-          <p className="text-lg font-bold text-foreground">{sectorCount}</p>
+        <div className="bg-white/5 rounded-xl p-3 text-center">
+          <p className="text-lg font-bold text-foreground font-display">{sectorCount}</p>
           <p className="text-xs text-muted-foreground">Sectors</p>
         </div>
       </div>
-    </div>
+    </GlassCard>
   );
 }
 
@@ -254,10 +264,10 @@ function AddHoldingForm({ onAdd }: { onAdd: (h: HoldingFormData) => void }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="glass-card rounded-xl p-5">
+    <GlassCard className="p-5">
       <div className="flex items-center gap-2 mb-4">
         <Plus size={16} className="text-primary" />
-        <h3 className="font-semibold text-foreground">Add Holding</h3>
+        <h3 className="font-semibold text-foreground font-display">Add Holding</h3>
       </div>
       <div className="grid grid-cols-3 gap-3 mb-3">
         <div>
@@ -292,10 +302,10 @@ function AddHoldingForm({ onAdd }: { onAdd: (h: HoldingFormData) => void }) {
         </div>
       </div>
       {error && <p className="text-xs text-red-400 mb-2">{error}</p>}
-      <Button type="submit" size="sm" className="w-full bg-primary hover:bg-primary/90">
+      <Button type="submit" size="sm" className="w-full btn-violet rounded-xl animate-pulse-accent" onClick={handleSubmit}>
         <Plus size={14} className="mr-1" /> Add to Portfolio
       </Button>
-    </form>
+    </GlassCard>
   );
 }
 
@@ -417,11 +427,11 @@ export default function PortfolioAnalyzerPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center glass-card rounded-2xl p-10 max-w-sm">
+        <GlassCard variant="aurora" className="text-center p-10 max-w-sm">
           <Shield size={40} className="mx-auto mb-4 text-primary opacity-60" />
-          <h2 className="text-xl font-bold text-foreground mb-2">Authentication Required</h2>
+          <h2 className="text-xl font-bold text-foreground font-display mb-2">Authentication Required</h2>
           <p className="text-sm text-muted-foreground">Please log in to access your portfolio analyzer.</p>
-        </div>
+        </GlassCard>
       </div>
     );
   }
@@ -430,11 +440,11 @@ export default function PortfolioAnalyzerPage() {
     return (
       <div className="min-h-screen bg-background p-6">
         <div className="max-w-7xl mx-auto space-y-4">
-          <Skeleton className="h-32 rounded-xl" />
+          <Skeleton className="h-32 rounded-2xl" />
           <div className="grid grid-cols-4 gap-4">
-            {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-28 rounded-xl" />)}
+            {[...Array(4)].map((_, i) => <Skeleton key={i} className="h-28 rounded-2xl" />)}
           </div>
-          <Skeleton className="h-64 rounded-xl" />
+          <Skeleton className="h-64 rounded-2xl" />
         </div>
       </div>
     );
@@ -444,15 +454,15 @@ export default function PortfolioAnalyzerPage() {
     <div className="min-h-screen bg-background">
       {/* Hero */}
       <div className="relative overflow-hidden border-b border-border/30">
-        <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-background to-primary/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-violet/8 via-background to-lime/5 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <div className="flex items-center gap-2 mb-1">
-                <div className="p-2 rounded-lg bg-accent/20">
-                  <PieIcon size={20} className="text-accent" />
+                <div className="p-2 rounded-xl bg-violet/15">
+                  <PieIcon size={20} className="text-violet" />
                 </div>
-                <h1 className="text-2xl font-bold text-foreground">Portfolio Analyzer</h1>
+                <h1 className="text-2xl font-bold text-foreground font-display">Portfolio Analyzer</h1>
               </div>
               <p className="text-sm text-muted-foreground">
                 Real-time allocation, performance tracking, and risk exposure analysis.
@@ -461,7 +471,7 @@ export default function PortfolioAnalyzerPage() {
             <Button
               onClick={handleSave}
               disabled={saving || holdings.length === 0}
-              className="bg-primary hover:bg-primary/90 gap-2"
+              className="btn-violet gap-2 rounded-xl animate-pulse-accent"
             >
               {saving ? <RefreshCw size={14} className="animate-spin" /> : <Save size={14} />}
               Save Portfolio
@@ -474,7 +484,7 @@ export default function PortfolioAnalyzerPage() {
               label="Total Portfolio Value"
               value={formatCurrency(totalCurrentValue)}
               icon={DollarSign}
-              color="#10b981"
+              color="#a855f7"
               trend={totalPnL >= 0 ? 'up' : 'down'}
             />
             <SummaryCard
@@ -482,14 +492,14 @@ export default function PortfolioAnalyzerPage() {
               value={`${totalPnL >= 0 ? '+' : ''}${formatCurrency(totalPnL)}`}
               sub={`${totalPnLPct >= 0 ? '+' : ''}${totalPnLPct.toFixed(2)}%`}
               icon={totalPnL >= 0 ? TrendingUp : TrendingDown}
-              color={totalPnL >= 0 ? '#10b981' : '#ef4444'}
+              color={totalPnL >= 0 ? '#34d399' : '#f87171'}
               trend={totalPnL >= 0 ? 'up' : 'down'}
             />
             <SummaryCard
               label="Cost Basis"
               value={formatCurrency(totalCostBasis)}
               icon={Target}
-              color="#6366f1"
+              color="#818cf8"
             />
             <SummaryCard
               label="Risk Score"
@@ -504,117 +514,103 @@ export default function PortfolioAnalyzerPage() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <Tabs defaultValue="overview">
-          <TabsList className="mb-6 bg-white/5 border border-border/30">
-            <TabsTrigger value="overview">📊 Overview</TabsTrigger>
-            <TabsTrigger value="holdings">📋 Holdings</TabsTrigger>
-            <TabsTrigger value="performance">📈 Performance</TabsTrigger>
-            <TabsTrigger value="risk">🛡️ Risk</TabsTrigger>
+          <TabsList className="mb-6 bg-white/5 border border-border/30 rounded-xl">
+            <TabsTrigger value="overview" className="gap-2 rounded-lg data-[state=active]:bg-primary/15 data-[state=active]:text-primary">
+              <PieIcon size={14} /> Overview
+            </TabsTrigger>
+            <TabsTrigger value="holdings" className="gap-2 rounded-lg data-[state=active]:bg-primary/15 data-[state=active]:text-primary">
+              <BarChart2 size={14} /> Holdings
+            </TabsTrigger>
+            <TabsTrigger value="performance" className="gap-2 rounded-lg data-[state=active]:bg-primary/15 data-[state=active]:text-primary">
+              <Activity size={14} /> Performance
+            </TabsTrigger>
+            <TabsTrigger value="risk" className="gap-2 rounded-lg data-[state=active]:bg-primary/15 data-[state=active]:text-primary">
+              <Shield size={14} /> Risk
+            </TabsTrigger>
           </TabsList>
 
-          {/* ── Overview Tab ── */}
-          <TabsContent value="overview" className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Overview Tab */}
+          <TabsContent value="overview">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
               {/* Allocation Pie */}
-              <div className="glass-card rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <PieIcon size={16} className="text-primary" />
-                  <h3 className="font-semibold text-foreground">Portfolio Allocation</h3>
-                </div>
+              <GlassCard className="p-5">
+                <h3 className="font-semibold text-foreground mb-4 font-display flex items-center gap-2">
+                  <PieIcon size={15} className="text-violet" /> Asset Allocation
+                </h3>
                 {allocationData.length === 0 ? (
-                  <div className="h-48 flex items-center justify-center text-muted-foreground text-sm">
+                  <div className="flex items-center justify-center h-48 text-muted-foreground text-sm">
                     Add holdings to see allocation
                   </div>
                 ) : (
                   <ResponsiveContainer width="100%" height={220}>
                     <PieChart>
-                      <Pie
-                        data={allocationData}
-                        cx="50%"
-                        cy="50%"
-                        outerRadius={80}
-                        dataKey="value"
-                        paddingAngle={2}
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        labelLine={false}
-                      >
-                        {allocationData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
+                      <Pie data={allocationData} cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={3} dataKey="value">
+                        {allocationData.map((entry, i) => (
+                          <Cell key={i} fill={entry.color} />
+                        ))}
                       </Pie>
                       <Tooltip
-                        contentStyle={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }}
-                        formatter={(val: number) => [formatCurrency(val), 'Value']}
+                        contentStyle={{ background: 'oklch(0.16 0.022 275)', border: '1px solid oklch(0.28 0.025 275 / 0.5)', borderRadius: '12px', fontSize: '12px' }}
+                        formatter={(v: number) => [formatCurrency(v), 'Value']}
                       />
+                      <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '11px' }} />
                     </PieChart>
                   </ResponsiveContainer>
                 )}
-              </div>
+              </GlassCard>
 
               {/* Sector Allocation */}
-              <div className="glass-card rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <BarChart2 size={16} className="text-accent" />
-                  <h3 className="font-semibold text-foreground">Sector Allocation</h3>
-                </div>
+              <GlassCard className="p-5">
+                <h3 className="font-semibold text-foreground mb-4 font-display flex items-center gap-2">
+                  <BarChart2 size={15} className="text-lime" /> Sector Breakdown
+                </h3>
                 {sectorData.length === 0 ? (
-                  <div className="h-48 flex items-center justify-center text-muted-foreground text-sm">
+                  <div className="flex items-center justify-center h-48 text-muted-foreground text-sm">
                     Add holdings to see sectors
                   </div>
                 ) : (
                   <ResponsiveContainer width="100%" height={220}>
-                    <BarChart data={sectorData} layout="vertical" margin={{ left: 10, right: 20 }}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
-                      <XAxis
-                        type="number"
-                        tick={{ fontSize: 10, fill: '#9ca3af' }}
-                        tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}K`}
-                      />
-                      <YAxis type="category" dataKey="name" tick={{ fontSize: 11, fill: '#9ca3af' }} width={80} />
+                    <BarChart data={sectorData} layout="vertical" margin={{ left: 10 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                      <XAxis type="number" tick={{ fontSize: 10, fill: '#9ca3af' }} tickFormatter={v => `$${(v / 1000).toFixed(0)}K`} />
+                      <YAxis type="category" dataKey="name" tick={{ fontSize: 10, fill: '#9ca3af' }} width={80} />
                       <Tooltip
-                        contentStyle={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }}
-                        formatter={(val: number) => [formatCurrency(val), 'Value']}
+                        contentStyle={{ background: 'oklch(0.16 0.022 275)', border: '1px solid oklch(0.28 0.025 275 / 0.5)', borderRadius: '12px', fontSize: '12px' }}
+                        formatter={(v: number) => [formatCurrency(v), 'Value']}
                       />
-                      <Bar dataKey="value" radius={[0, 4, 4, 0]}>
-                        {sectorData.map((entry, i) => <Cell key={i} fill={entry.color} />)}
+                      <Bar dataKey="value" radius={[0, 6, 6, 0]}>
+                        {sectorData.map((entry, i) => (
+                          <Cell key={i} fill={entry.color} />
+                        ))}
                       </Bar>
                     </BarChart>
                   </ResponsiveContainer>
                 )}
-              </div>
+              </GlassCard>
             </div>
 
             {/* Add Holding */}
-            <AddHoldingForm onAdd={addHolding} />
+            <div className="mt-5">
+              <AddHoldingForm onAdd={addHolding} />
+            </div>
           </TabsContent>
 
-          {/* ── Holdings Tab ── */}
+          {/* Holdings Tab */}
           <TabsContent value="holdings">
-            <div className="glass-card rounded-xl overflow-hidden">
-              <div className="p-4 border-b border-border/20 flex items-center justify-between">
-                <h3 className="font-semibold text-foreground flex items-center gap-2">
-                  <Activity size={16} className="text-primary" />
-                  Live Holdings ({holdings.length})
-                </h3>
-                <span className="flex items-center gap-1.5 text-xs text-emerald-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                  Live prices
-                </span>
-              </div>
+            <GlassCard className="p-0 overflow-hidden">
               {holdings.length === 0 ? (
-                <div className="p-10 text-center text-muted-foreground">
-                  <PieIcon size={36} className="mx-auto mb-3 opacity-30" />
-                  <p>No holdings yet. Add some from the Overview tab.</p>
+                <div className="flex flex-col items-center justify-center py-16 text-center">
+                  <PieIcon size={40} className="text-muted-foreground mb-3 opacity-40" />
+                  <p className="text-muted-foreground text-sm">No holdings yet. Add your first position.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-border/20 bg-white/3">
-                        <th className="text-left py-3 px-4 text-xs text-muted-foreground font-medium">Asset</th>
-                        <th className="text-right py-3 px-4 text-xs text-muted-foreground font-medium">Shares</th>
-                        <th className="text-right py-3 px-4 text-xs text-muted-foreground font-medium">Live Price</th>
-                        <th className="text-right py-3 px-4 text-xs text-muted-foreground font-medium">Avg Cost</th>
-                        <th className="text-right py-3 px-4 text-xs text-muted-foreground font-medium">Value</th>
-                        <th className="text-right py-3 px-4 text-xs text-muted-foreground font-medium">P&L</th>
-                        <th className="py-3 px-4" />
+                      <tr className="border-b border-border/20">
+                        {['Asset', 'Shares', 'Live Price', 'Avg Cost', 'Value', 'P&L', ''].map(h => (
+                          <th key={h} className="py-3 px-4 text-xs font-semibold text-muted-foreground text-right first:text-left">{h}</th>
+                        ))}
                       </tr>
                     </thead>
                     <tbody>
@@ -625,138 +621,87 @@ export default function PortfolioAnalyzerPage() {
                   </table>
                 </div>
               )}
-            </div>
-            <div className="mt-4">
+            </GlassCard>
+            <div className="mt-5">
               <AddHoldingForm onAdd={addHolding} />
             </div>
           </TabsContent>
 
-          {/* ── Performance Tab ── */}
+          {/* Performance Tab */}
           <TabsContent value="performance">
-            <div className="space-y-4">
-              <div className="glass-card rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp size={16} className="text-primary" />
-                  <h3 className="font-semibold text-foreground">30-Day Performance vs Benchmark</h3>
-                  <span className="ml-auto text-xs text-muted-foreground">Simulated</span>
-                </div>
-                <ResponsiveContainer width="100%" height={280}>
-                  <AreaChart data={performanceData} margin={{ top: 5, right: 10, left: 0, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="portfolioGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#10b981" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
-                      </linearGradient>
-                      <linearGradient id="benchmarkGrad" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                    <XAxis
-                      dataKey="date"
-                      tick={{ fontSize: 10, fill: '#9ca3af' }}
-                      interval={Math.floor(performanceData.length / 6)}
-                    />
-                    <YAxis
-                      tick={{ fontSize: 10, fill: '#9ca3af' }}
-                      tickFormatter={(v: number) => `$${(v / 1000).toFixed(0)}K`}
-                    />
-                    <Tooltip
-                      contentStyle={{ background: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 8, fontSize: 12 }}
-                      formatter={(val: number, name: string) => [formatCurrency(val), name === 'value' ? 'Portfolio' : 'Benchmark']}
-                    />
-                    <Area type="monotone" dataKey="value" stroke="#10b981" fill="url(#portfolioGrad)" strokeWidth={2} dot={false} name="value" />
-                    <Area type="monotone" dataKey="benchmark" stroke="#6366f1" fill="url(#benchmarkGrad)" strokeWidth={1.5} strokeDasharray="4 4" dot={false} name="benchmark" />
-                    <Legend wrapperStyle={{ fontSize: 11 }} formatter={(v: string) => v === 'value' ? 'Portfolio' : 'Benchmark'} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              </div>
-
-              {/* Performance metrics */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                {[
-                  { label: 'Total Return', value: `${totalPnLPct >= 0 ? '+' : ''}${totalPnLPct.toFixed(2)}%`, color: totalPnLPct >= 0 ? '#10b981' : '#ef4444' },
-                  { label: 'Sharpe Ratio', value: (1.2 + Math.random() * 0.8).toFixed(2), color: '#6366f1' },
-                  { label: 'Max Drawdown', value: `-${(5 + Math.random() * 10).toFixed(1)}%`, color: '#f59e0b' },
-                  { label: 'Beta', value: (0.8 + Math.random() * 0.4).toFixed(2), color: '#10b981' },
-                ].map(m => (
-                  <div key={m.label} className="glass-card rounded-xl p-4 text-center">
-                    <p className="text-2xl font-bold" style={{ color: m.color }}>{m.value}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{m.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <GlassCard className="p-5">
+              <h3 className="font-semibold text-foreground mb-4 font-display flex items-center gap-2">
+                <Activity size={15} className="text-cyan" /> 30-Day Performance
+              </h3>
+              <ResponsiveContainer width="100%" height={300}>
+                <AreaChart data={performanceData}>
+                  <defs>
+                    <linearGradient id="portfolioGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#a855f7" stopOpacity={0.3} />
+                      <stop offset="95%" stopColor="#a855f7" stopOpacity={0} />
+                    </linearGradient>
+                    <linearGradient id="benchmarkGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#84cc16" stopOpacity={0.2} />
+                      <stop offset="95%" stopColor="#84cc16" stopOpacity={0} />
+                    </linearGradient>
+                  </defs>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                  <XAxis dataKey="date" tick={{ fontSize: 10, fill: '#9ca3af' }} interval={4} />
+                  <YAxis tick={{ fontSize: 10, fill: '#9ca3af' }} tickFormatter={v => `$${(v / 1000).toFixed(0)}K`} />
+                  <Tooltip
+                    contentStyle={{ background: 'oklch(0.16 0.022 275)', border: '1px solid oklch(0.28 0.025 275 / 0.5)', borderRadius: '12px', fontSize: '12px' }}
+                    formatter={(v: number) => [formatCurrency(v)]}
+                  />
+                  <Legend iconType="circle" iconSize={8} wrapperStyle={{ fontSize: '11px' }} />
+                  <Area type="monotone" dataKey="value" name="Portfolio" stroke="#a855f7" fill="url(#portfolioGrad)" strokeWidth={2} dot={false} />
+                  <Area type="monotone" dataKey="benchmark" name="Benchmark" stroke="#84cc16" fill="url(#benchmarkGrad)" strokeWidth={1.5} strokeDasharray="4 4" dot={false} />
+                </AreaChart>
+              </ResponsiveContainer>
+            </GlassCard>
           </TabsContent>
 
-          {/* ── Risk Tab ── */}
+          {/* Risk Tab */}
           <TabsContent value="risk">
-            <div className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <RiskMetricsPanel holdings={holdings} riskScore={riskScore} />
-                <div className="glass-card rounded-xl p-5">
-                  <div className="flex items-center gap-2 mb-4">
-                    <AlertTriangle size={16} className="text-amber-400" />
-                    <h3 className="font-semibold text-foreground">Risk Exposure</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              <RiskMetricsPanel holdings={holdings} riskScore={riskScore} />
+              <GlassCard className="p-5">
+                <h3 className="font-semibold text-foreground mb-4 font-display flex items-center gap-2">
+                  <AlertTriangle size={15} className="text-lime" /> Risk Score Adjustment
+                </h3>
+                <p className="text-xs text-muted-foreground mb-4">
+                  Manually adjust the risk score to reflect your portfolio's risk tolerance.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-muted-foreground">Risk Score</span>
+                    <span className="text-lg font-bold font-display" style={{ color: getRiskLevel(riskScore).color }}>
+                      {riskScore} — {getRiskLevel(riskScore).label}
+                    </span>
                   </div>
-                  <div className="space-y-3">
-                    {[
-                      { label: 'Market Risk', value: riskScore, color: '#ef4444' },
-                      { label: 'Concentration Risk', value: holdings.length > 0 ? Math.max(10, 100 - holdings.length * 10) : 50, color: '#f59e0b' },
-                      { label: 'Sector Risk', value: Math.max(10, 80 - new Set(holdings.map(h => SECTOR_MAP[h.symbol] ?? 'Other')).size * 15), color: '#f97316' },
-                      { label: 'Liquidity Risk', value: 25, color: '#10b981' },
-                      { label: 'Volatility Risk', value: Math.min(90, riskScore + 10), color: '#6366f1' },
-                    ].map(r => (
-                      <div key={r.label}>
-                        <div className="flex justify-between text-xs mb-1">
-                          <span className="text-muted-foreground">{r.label}</span>
-                          <span style={{ color: r.color }}>{r.value}%</span>
-                        </div>
-                        <div className="h-2 rounded-full bg-white/10">
-                          <div className="h-full rounded-full transition-all" style={{ width: `${r.value}%`, background: r.color }} />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-5 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                    <div className="flex items-start gap-2">
-                      <Info size={13} className="text-amber-400 mt-0.5 shrink-0" />
-                      <p className="text-xs text-amber-200/80">
-                        Risk scores are calculated based on portfolio concentration, sector diversity, and historical volatility patterns.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Risk adjustment */}
-              <div className="glass-card rounded-xl p-5">
-                <div className="flex items-center gap-2 mb-4">
-                  <Zap size={16} className="text-primary" />
-                  <h3 className="font-semibold text-foreground">Adjust Risk Tolerance</h3>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-xs text-muted-foreground w-16">Conservative</span>
                   <input
                     type="range"
                     min={0}
                     max={100}
                     value={riskScore}
                     onChange={e => setRiskScore(Number(e.target.value))}
-                    className="flex-1 accent-primary"
+                    className="w-full accent-violet-500"
+                    style={{ accentColor: '#a855f7' }}
                   />
-                  <span className="text-xs text-muted-foreground w-16 text-right">Aggressive</span>
-                  <span className="text-sm font-bold text-foreground w-12 text-right">{riskScore}</span>
+                  <div className="flex justify-between text-xs text-muted-foreground">
+                    <span>Conservative</span>
+                    <span>Moderate</span>
+                    <span>Aggressive</span>
+                  </div>
                 </div>
-                <div className="mt-3 flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ background: getRiskLevel(riskScore).color }} />
-                  <span className="text-sm font-medium" style={{ color: getRiskLevel(riskScore).color }}>
-                    {getRiskLevel(riskScore).label} Risk Profile
-                  </span>
-                  <span className="text-xs text-muted-foreground ml-2">— {getRiskLevel(riskScore).description}</span>
+                <div className="mt-6 p-4 rounded-xl bg-white/5 border border-border/20">
+                  <div className="flex items-start gap-2">
+                    <Info size={14} className="text-muted-foreground mt-0.5 shrink-0" />
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {getRiskLevel(riskScore).description}. Consider diversifying across sectors to balance risk and return.
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </GlassCard>
             </div>
           </TabsContent>
         </Tabs>
